@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F332D4725C4D7D500FA47CF /* FridgeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F332D4625C4D7D500FA47CF /* FridgeService.swift */; };
+		3F332D4C25C5087F00FA47CF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F332D4B25C5087F00FA47CF /* NetworkManager.swift */; };
+		3F332D5125C508A500FA47CF /* NetworkManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F332D5025C508A500FA47CF /* NetworkManagerError.swift */; };
+		3F332D5725C50C3B00FA47CF /* FridgeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F332D5625C50C3B00FA47CF /* FridgeResponse.swift */; };
 		3FC84EBD25BE4F34007A0889 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC84EBC25BE4F34007A0889 /* AppDelegate.swift */; };
 		3FC84EBF25BE4F34007A0889 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC84EBE25BE4F34007A0889 /* SceneDelegate.swift */; };
-		3FC84EC125BE4F34007A0889 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC84EC025BE4F34007A0889 /* ViewController.swift */; };
+		3FC84EC125BE4F34007A0889 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC84EC025BE4F34007A0889 /* FridgeViewController.swift */; };
 		3FC84EC425BE4F34007A0889 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FC84EC225BE4F34007A0889 /* Main.storyboard */; };
 		3FC84EC725BE4F34007A0889 /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3FC84EC525BE4F34007A0889 /* Reciplease.xcdatamodeld */; };
 		3FC84EC925BE4F36007A0889 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FC84EC825BE4F36007A0889 /* Assets.xcassets */; };
@@ -36,10 +40,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F332D4625C4D7D500FA47CF /* FridgeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeService.swift; sourceTree = "<group>"; };
+		3F332D4B25C5087F00FA47CF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		3F332D5025C508A500FA47CF /* NetworkManagerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerError.swift; sourceTree = "<group>"; };
+		3F332D5625C50C3B00FA47CF /* FridgeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeResponse.swift; sourceTree = "<group>"; };
 		3FC84EB925BE4F34007A0889 /* Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FC84EBC25BE4F34007A0889 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FC84EBE25BE4F34007A0889 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3FC84EC025BE4F34007A0889 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3FC84EC025BE4F34007A0889 /* FridgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
 		3FC84EC325BE4F34007A0889 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3FC84EC625BE4F34007A0889 /* Reciplease.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Reciplease.xcdatamodel; sourceTree = "<group>"; };
 		3FC84EC825BE4F36007A0889 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -78,6 +86,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F332D3825C3242000FA47CF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3FC84EC525BE4F34007A0889 /* Reciplease.xcdatamodeld */,
+				3F332D4625C4D7D500FA47CF /* FridgeService.swift */,
+				3F332D5625C50C3B00FA47CF /* FridgeResponse.swift */,
+				3F332D5525C50C0F00FA47CF /* Network */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3F332D3A25C3244D00FA47CF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3FC84ECA25BE4F36007A0889 /* LaunchScreen.storyboard */,
+				3FC84EC225BE4F34007A0889 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3F332D3B25C3247200FA47CF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3FC84EC025BE4F34007A0889 /* FridgeViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		3F332D3F25C324A800FA47CF /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				3FC84EC825BE4F36007A0889 /* Assets.xcassets */,
+				3FC84EBC25BE4F34007A0889 /* AppDelegate.swift */,
+				3FC84EBE25BE4F34007A0889 /* SceneDelegate.swift */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		3F332D5525C50C0F00FA47CF /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				3F332D4B25C5087F00FA47CF /* NetworkManager.swift */,
+				3F332D5025C508A500FA47CF /* NetworkManagerError.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		3FC84EB025BE4F34007A0889 = {
 			isa = PBXGroup;
 			children = (
@@ -101,14 +156,11 @@
 		3FC84EBB25BE4F34007A0889 /* Reciplease */ = {
 			isa = PBXGroup;
 			children = (
-				3FC84EBC25BE4F34007A0889 /* AppDelegate.swift */,
-				3FC84EBE25BE4F34007A0889 /* SceneDelegate.swift */,
-				3FC84EC025BE4F34007A0889 /* ViewController.swift */,
-				3FC84EC225BE4F34007A0889 /* Main.storyboard */,
-				3FC84EC825BE4F36007A0889 /* Assets.xcassets */,
-				3FC84ECA25BE4F36007A0889 /* LaunchScreen.storyboard */,
+				3F332D3B25C3247200FA47CF /* Controller */,
+				3F332D3A25C3244D00FA47CF /* View */,
+				3F332D3825C3242000FA47CF /* Model */,
 				3FC84ECD25BE4F36007A0889 /* Info.plist */,
-				3FC84EC525BE4F34007A0889 /* Reciplease.xcdatamodeld */,
+				3F332D3F25C324A800FA47CF /* Others */,
 			);
 			path = Reciplease;
 			sourceTree = "<group>";
@@ -261,10 +313,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F332D4C25C5087F00FA47CF /* NetworkManager.swift in Sources */,
+				3F332D4725C4D7D500FA47CF /* FridgeService.swift in Sources */,
 				3FC84EC725BE4F34007A0889 /* Reciplease.xcdatamodeld in Sources */,
-				3FC84EC125BE4F34007A0889 /* ViewController.swift in Sources */,
+				3FC84EC125BE4F34007A0889 /* FridgeViewController.swift in Sources */,
 				3FC84EBD25BE4F34007A0889 /* AppDelegate.swift in Sources */,
+				3F332D5125C508A500FA47CF /* NetworkManagerError.swift in Sources */,
 				3FC84EBF25BE4F34007A0889 /* SceneDelegate.swift in Sources */,
+				3F332D5725C50C3B00FA47CF /* FridgeResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
