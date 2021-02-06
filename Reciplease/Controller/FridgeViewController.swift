@@ -6,13 +6,14 @@ class FridgeViewController: UIViewController {
         super.viewDidLoad()
         ingredientsTableView.dataSource = self
         ingredientsTableView.delegate = self
+        
     }
     
     
     @IBOutlet weak var ingredientsTextField: UITextField!
     @IBOutlet weak var ingredientsTableView: UITableView!
     
-    let fridgeService = FridegeService()
+    let fridgeService = FridgeService()
     
     var ingredients: [String] = [] {
         didSet {
@@ -30,24 +31,26 @@ class FridgeViewController: UIViewController {
         }
     }
     @IBAction func didTapOnSearchRecipesButton() {
+        
+        fridgeService.getRecipe(ingredients: ingredientsTextField.text!, completion: assignTranslatedText(fridgeResponse:))
     }
     
-
-    func assignRecipeToUiTextField(fridgeResponse: Result<FridgeResponse, NetworkManagerError>) {
+    private func assignTranslatedText(fridgeResponse: Result<FridgeResponse, NetworkManagerError>) {
+        
         DispatchQueue.main.async {
+            
             switch fridgeResponse {
-            case .failure( _):
-                print("error")
+            case .failure(let error):
+                print(error.localizedDescription)
             case .success(let response):
-                self.eachIngredient(ingredinetsTextField: self.ingredientsTextField, response: response)
-
+                guard let ingredient = response.hits?.first?.recipe else { return }
+                print(ingredient)
             }
         }
     }
     
-
+    
 }
-
 
 
 extension FridgeViewController: UITableViewDataSource {

@@ -2,26 +2,25 @@
 import Foundation
 
 
-class FridegeService {
+class FridgeService {
     
     
-    func getRecipe(ingredient: String, completion: @escaping (Result<FridgeResponse, NetworkManagerError>) -> Void) {
+    func getRecipe(ingredients: String, completion: @escaping (Result<FridgeResponse, NetworkManagerError>) -> Void) {
         let networkManager = NetworkManager()
         
-        guard let recipeURL = getRecipeURL(ingredient: ingredient) else {
+        guard let recipeURL = getRecipeURL(ingredient: ingredients) else {
             completion(.failure(.couldNotCreateUrl))
             return
-            
         }
-        
         networkManager.fetch(url: recipeURL, completion: completion)
     }
+    
     
     
     func getRecipeURL(ingredient: String) -> URL? {
         var urlComponents = URLComponents()
         
-        urlComponents.scheme = "http"
+        urlComponents.scheme = "https"
         urlComponents.host = "api.edamam.com"
         urlComponents.path = "/search"
         urlComponents.queryItems = [

@@ -1,11 +1,18 @@
 import Foundation
 
-// MARK: - FridgeService
+// MARK: - FridgeResponse
 struct FridgeResponse: Codable {
     let q: String?
     let from, to: Int?
     let more: Bool?
     let count: Int?
+    let hits: [Hit]?
+}
+
+// MARK: - Hit
+struct Hit: Codable {
+    let recipe: Recipe?
+    let bookmarked, bought: Bool?
 }
 
 // MARK: - Recipe

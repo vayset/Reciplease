@@ -11,7 +11,6 @@ class NetworkManager: NetworkManagerProtocol {
         self.session = session
     }
     
-    
     let session: URLSession
     
     func fetch<T : Codable>(url: URL, completion: @escaping (Result<T, NetworkManagerError>) -> Void)  {
