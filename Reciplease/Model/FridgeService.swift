@@ -1,9 +1,21 @@
 
 import Foundation
 
+protocol FridgeServiceDelegate {
+    func didUpdateIngredients()
+}
+
+
 
 class FridgeService {
+
+    var delegate: FridgeServiceDelegate?
     
+    var ingredients: [String] = [] {
+        didSet {
+            delegate?.didUpdateIngredients()
+        }
+    }
     
     func getRecipe(ingredients: String, completion: @escaping (Result<FridgeResponse, NetworkManagerError>) -> Void) {
         let networkManager = NetworkManager()
