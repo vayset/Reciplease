@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3F323C0025CFC0B000F27AAD /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F323BFF25CFC0B000F27AAD /* RecipesViewController.swift */; };
+		3F323C0525D08F3900F27AAD /* RecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F323C0425D08F3900F27AAD /* RecipeTableViewCell.swift */; };
 		3F332D4725C4D7D500FA47CF /* FridgeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F332D4625C4D7D500FA47CF /* FridgeService.swift */; };
 		3F332D4C25C5087F00FA47CF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F332D4B25C5087F00FA47CF /* NetworkManager.swift */; };
 		3F332D5125C508A500FA47CF /* NetworkManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F332D5025C508A500FA47CF /* NetworkManagerError.swift */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		3F323BFF25CFC0B000F27AAD /* RecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesViewController.swift; sourceTree = "<group>"; };
+		3F323C0425D08F3900F27AAD /* RecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableViewCell.swift; sourceTree = "<group>"; };
 		3F332D4625C4D7D500FA47CF /* FridgeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeService.swift; sourceTree = "<group>"; };
 		3F332D4B25C5087F00FA47CF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		3F332D5025C508A500FA47CF /* NetworkManagerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerError.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			children = (
 				3FC84ECA25BE4F36007A0889 /* LaunchScreen.storyboard */,
 				3FC84EC225BE4F34007A0889 /* Main.storyboard */,
+				3F323C0425D08F3900F27AAD /* RecipeTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F332D4C25C5087F00FA47CF /* NetworkManager.swift in Sources */,
+				3F323C0525D08F3900F27AAD /* RecipeTableViewCell.swift in Sources */,
 				3F323C0025CFC0B000F27AAD /* RecipesViewController.swift in Sources */,
 				3F332D4725C4D7D500FA47CF /* FridgeService.swift in Sources */,
 				3FC84EC725BE4F34007A0889 /* Reciplease.xcdatamodeld in Sources */,

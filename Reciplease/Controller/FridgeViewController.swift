@@ -13,7 +13,7 @@ class FridgeViewController: UIViewController {
     
     @IBOutlet weak var ingredientsTextField: UITextField!
     @IBOutlet weak var ingredientsTableView: UITableView!
-    
+
     let fridgeService = FridgeService()
     
     @IBAction func didTapOnAddIngredientsButton() {
@@ -24,10 +24,10 @@ class FridgeViewController: UIViewController {
         fridgeService.ingredients.removeAll()
     }
     @IBAction func didTapOnSearchRecipesButton() {
-        fridgeService.getRecipe(ingredients: fridgeService.ingredients.first!, completion: assignTranslatedText(fridgeResponse:))
+        fridgeService.getRecipes(completion: handleRecipesFetchResponse(fridgeResponse:))
     }
     
-    private func assignTranslatedText(fridgeResponse: Result<FridgeResponse, NetworkManagerError>) {
+    private func handleRecipesFetchResponse(fridgeResponse: Result<FridgeResponse, NetworkManagerError>) {
         
         DispatchQueue.main.async {
             
@@ -35,12 +35,21 @@ class FridgeViewController: UIViewController {
             case .failure(let error):
                 print(error.localizedDescription)
             case .success(let response):
-                guard let ingredient = response.hits?.first?.recipe else { return }
-                print(ingredient)
+                let recipes = response.hits!.map({$0.recipe})
+                
+                self.performSegue(withIdentifier: "goToRecipesSegue", sender: recipes)
             }
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if let destinationViewController = segue.destination as? RecipesViewController {
+            destinationViewController.recipes = sender as? [Recipe]
+        }
+        
+    }
     
 }
 

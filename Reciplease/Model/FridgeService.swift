@@ -1,14 +1,14 @@
 
 import Foundation
 
-protocol FridgeServiceDelegate {
+protocol FridgeServiceDelegate: class {
     func didUpdateIngredients()
     
 }
 
 class FridgeService {
 
-    var delegate: FridgeServiceDelegate?
+    weak var delegate: FridgeServiceDelegate?
     
     var ingredients: [String] = [] {
         didSet {
@@ -16,10 +16,10 @@ class FridgeService {
         }
     }
     
-    func getRecipe(ingredients: String, completion: @escaping (Result<FridgeResponse, NetworkManagerError>) -> Void) {
+    func getRecipes(completion: @escaping (Result<FridgeResponse, NetworkManagerError>) -> Void) {
         let networkManager = NetworkManager()
         
-        guard let recipeURL = getRecipeURL(ingredient: ingredients) else {
+        guard let recipeURL = getRecipeURL() else {
             completion(.failure(.couldNotCreateUrl))
             return
         }
@@ -28,14 +28,17 @@ class FridgeService {
     
     
     
-    func getRecipeURL(ingredient: String) -> URL? {
+    func getRecipeURL() -> URL? {
         var urlComponents = URLComponents()
+        let ingredientsQuery = ingredients.reduce("") { (currentResult, ingredientToAppend) -> String in
+            currentResult + " " + ingredientToAppend
+        }
         
         urlComponents.scheme = "https"
         urlComponents.host = "api.edamam.com"
         urlComponents.path = "/search"
         urlComponents.queryItems = [
-            URLQueryItem(name: "q", value: ingredient),
+            URLQueryItem(name: "q", value: ingredientsQuery),
             URLQueryItem(name: "app_id", value: "0d4f5146"),
             URLQueryItem(name: "app_key", value: "bde031a40579acca357801fcc87f4183"),
         ]
