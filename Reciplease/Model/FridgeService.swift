@@ -3,9 +3,8 @@ import Foundation
 
 protocol FridgeServiceDelegate {
     func didUpdateIngredients()
+    
 }
-
-
 
 class FridgeService {
 

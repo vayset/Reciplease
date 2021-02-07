@@ -18,14 +18,12 @@ class FridgeViewController: UIViewController {
     
     @IBAction func didTapOnAddIngredientsButton() {
         fridgeService.ingredients.append(ingredientsTextField.text!)
+        ingredientsTextField.text?.removeAll()
     }
     @IBAction func didTapOnClearIngredientsButton() {
-        if fridgeService.ingredients != [] {
-            fridgeService.ingredients.remove(at: 0)
-        }
+        fridgeService.ingredients.removeAll()
     }
     @IBAction func didTapOnSearchRecipesButton() {
-        
         fridgeService.getRecipe(ingredients: fridgeService.ingredients.first!, completion: assignTranslatedText(fridgeResponse:))
     }
     

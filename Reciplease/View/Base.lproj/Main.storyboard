@@ -138,6 +138,7 @@
                                         </state>
                                         <connections>
                                             <action selector="didTapOnSearchRecipesButton" destination="J5I-4z-5AP" eventType="touchUpInside" id="oz8-qo-Xzs"/>
+                                            <segue destination="Sk4-JP-72D" kind="show" id="VKd-ah-6Tu"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -225,6 +226,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tB3-aG-uYF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1297" y="609"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="26T-34-Mvp">
+            <objects>
+                <viewController id="Sk4-JP-72D" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wt3-ex-xeX">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="673"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8Ni-VA-eLK">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="673"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipesCell" id="GeS-Pw-UOS">
+                                        <rect key="frame" x="0.0" y="28" width="390" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GeS-Pw-UOS" id="yX0-Da-Bo4">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="t1n-h4-46R"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="8Ni-VA-eLK" firstAttribute="leading" secondItem="t1n-h4-46R" secondAttribute="leading" id="TiR-7I-Imv"/>
+                            <constraint firstItem="t1n-h4-46R" firstAttribute="trailing" secondItem="8Ni-VA-eLK" secondAttribute="trailing" id="mJg-Cs-mqZ"/>
+                            <constraint firstItem="t1n-h4-46R" firstAttribute="bottom" secondItem="8Ni-VA-eLK" secondAttribute="bottom" id="rGn-Uy-dBd"/>
+                            <constraint firstItem="8Ni-VA-eLK" firstAttribute="top" secondItem="t1n-h4-46R" secondAttribute="top" id="zox-3S-Ak6"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="55v-8e-kRI"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y8d-w0-UUv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3080" y="-91"/>
         </scene>
     </scenes>
     <resources>
