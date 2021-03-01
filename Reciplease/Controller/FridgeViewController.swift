@@ -35,7 +35,11 @@ class FridgeViewController: UIViewController {
             case .failure(let error):
                 print(error.localizedDescription)
             case .success(let response):
-                let recipes = response.hits!.map({$0.recipe})
+                guard let hits = response.hits else {
+                    // presentAlert
+                    return
+                }
+                let recipes = hits.map({$0.recipe})
                 
                 self.performSegue(withIdentifier: "goToRecipesSegue", sender: recipes)
             }
@@ -45,8 +49,11 @@ class FridgeViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
-        if let destinationViewController = segue.destination as? RecipesViewController {
-            destinationViewController.recipes = sender as? [Recipe]
+        if
+            let destinationViewController = segue.destination as? RecipesViewController,
+            let recipes = sender as? [Recipe]
+        {
+            destinationViewController.recipesDataContainers = recipes.map { RecipeDataContainer(recipe: $0) }
         }
         
     }

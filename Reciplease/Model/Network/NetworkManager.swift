@@ -32,13 +32,19 @@ class NetworkManager: NetworkManagerProtocol {
                 completion(.failure(.noData))
                 return
             }
-            guard let decoddedData = try? JSONDecoder().decode(T.self, from: data) else {
+            
+            do {
+                let decoddedData = try JSONDecoder().decode(T.self, from: data)
+                completion(.success(decoddedData))
+                return
+            } catch {
+                print(error)
                 completion(.failure(.failedToDecodeJSON))
                 return
             }
             
-            completion(.success(decoddedData))
-            return
+   
+        
         }
         
         task.resume()

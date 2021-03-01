@@ -7,9 +7,20 @@
 import UIKit
 import Foundation
 
+
+class RecipeDataContainer {
+    init(recipe: Recipe, photo: UIImage? = nil) {
+        self.recipe = recipe
+        self.photo = photo
+    }
+    
+    let recipe: Recipe
+    var photo: UIImage?
+}
+
 class RecipesViewController: UIViewController {
     
-    var recipes: [Recipe]?
+    var recipesDataContainers: [RecipeDataContainer] = []
     
     @IBOutlet weak var recipesTableView: UITableView!
     
@@ -26,7 +37,7 @@ extension RecipesViewController: UITableViewDataSource  {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipes?.count ?? 0
+        return recipesDataContainers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -34,11 +45,9 @@ extension RecipesViewController: UITableViewDataSource  {
             return UITableViewCell()
         }
         
-        guard let recipe = recipes?[indexPath.row] else {
-            return UITableViewCell()
-        }
+        let recipeDataContainer = recipesDataContainers[indexPath.row]
         
-        cell.configure(recipe: recipe)
+        cell.configure(recipeDataContainer: recipeDataContainer)
         
         return cell
     }
