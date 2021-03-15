@@ -8,19 +8,12 @@ import UIKit
 import Foundation
 
 
-class RecipeDataContainer {
-    init(recipe: Recipe, photo: UIImage? = nil) {
-        self.recipe = recipe
-        self.photo = photo
-    }
-    
-    let recipe: Recipe
-    var photo: UIImage?
-}
 
 class RecipesViewController: UIViewController {
     
     var recipesDataContainers: [RecipeDataContainer] = []
+    
+    private let fridgeService = FridgeService.shared
     
     @IBOutlet weak var recipesTableView: UITableView!
     
@@ -28,11 +21,23 @@ class RecipesViewController: UIViewController {
         super.viewDidLoad()
         recipesTableView.dataSource = self
         recipesTableView.delegate = self
+        
+        fridgeService.fetchRecipesPhotos(recipesDataContainers: recipesDataContainers)
+        
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+
+        if
+            let destinationViewController = segue.destination as? RecipesDetailsViewController,
+            let recipeDataContainer = sender as? RecipeDataContainer
+        {
+            destinationViewController.recipeDataContainer = recipeDataContainer
+        }
 }
 
+}
 extension RecipesViewController: UITableViewDataSource  {
     
     
@@ -50,12 +55,17 @@ extension RecipesViewController: UITableViewDataSource  {
         cell.configure(recipeDataContainer: recipeDataContainer)
         return cell
     }
+
     
 }
 
 extension RecipesViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
+        let recipeDataContainer = recipesDataContainers[indexPath.row]
+        performSegue(withIdentifier: "recipesList", sender: recipeDataContainer)
     }
     
 }

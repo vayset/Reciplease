@@ -7,9 +7,13 @@ protocol FridgeServiceDelegate: class {
 }
 
 class FridgeService {
+    static let shared = FridgeService()
+    
     var recipesDataContainers: [RecipeDataContainer] = []
 
     weak var delegate: FridgeServiceDelegate?
+    
+    private let networkManager = NetworkManager()
     
     var ingredients: [String] = [] {
         didSet {
@@ -18,7 +22,7 @@ class FridgeService {
     }
     
     func getRecipes(completion: @escaping (Result<FridgeResponse, NetworkManagerError>) -> Void) {
-        let networkManager = NetworkManager()
+        
         print(recipesDataContainers.first?.recipe.image ?? "error")
         guard let recipeURL = getRecipeURL() else {
             completion(.failure(.couldNotCreateUrl))
@@ -45,6 +49,26 @@ class FridgeService {
         return urlComponents.url
     }
     
+    
+    
+    func fetchRecipesPhotos(recipesDataContainers: [RecipeDataContainer]) {
+        for recipesDataContainer in recipesDataContainers {
+            guard
+                let recipeImageUrlString = recipesDataContainer.recipe.image,
+                let recipeImageUrl = URL(string: recipeImageUrlString)
+                else {
+                continue
+            }
+            networkManager.fetchData(url: recipeImageUrl) { (result) in
+                switch result {
+                case .success(let imageData):
+                    recipesDataContainer.photo = imageData
+                case .failure(let error):
+                    print("Could not fetch recipe photo data with error: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
     
     
     

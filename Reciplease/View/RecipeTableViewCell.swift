@@ -25,15 +25,13 @@ class RecipeTableViewCell: UITableViewCell {
 
         recipeTitleLabel.text = recipe.label
         recipeSubtitleLabel.text = recipe.ingredientLines?.first
-        getImage(stringImage: recipe.image ?? "error")
+        
+        if let photoData = recipeDataContainer.photo {
+            recipeBackgroundImageView.image = UIImage(data: photoData)
+        }
+        
     }
 
     
-    func getImage(stringImage: String) {
-        let imageURL = URL(string: stringImage)
-        guard let imageData = try? Data(contentsOf: imageURL!) else { return }
-        guard let image = UIImage(data: imageData) else { return }
-        self.recipeBackgroundImageView.image = image
-    }
     
 }

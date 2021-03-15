@@ -14,7 +14,7 @@ class FridgeViewController: UIViewController {
     @IBOutlet weak var ingredientsTextField: UITextField!
     @IBOutlet weak var ingredientsTableView: UITableView!
 
-    let fridgeService = FridgeService()
+    let fridgeService = FridgeService.shared
     
     @IBAction func didTapOnAddIngredientsButton() {
         fridgeService.ingredients.append("- \(ingredientsTextField.text!)")
@@ -40,7 +40,6 @@ class FridgeViewController: UIViewController {
                     return
                 }
                 let recipes = hits.map({$0.recipe})
-                
                 self.performSegue(withIdentifier: "goToRecipesSegue", sender: recipes)
             }
         }
@@ -82,6 +81,5 @@ extension FridgeViewController: FridgeServiceDelegate {
     func didUpdateIngredients() {
         ingredientsTableView.reloadData()
     }
-    
     
 }
