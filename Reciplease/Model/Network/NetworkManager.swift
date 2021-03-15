@@ -43,11 +43,10 @@ class NetworkManager: NetworkManagerProtocol {
                 return
             }
             
-   
-        
         }
         
         task.resume()
     }
     
 }
+

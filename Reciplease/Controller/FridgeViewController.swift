@@ -17,7 +17,7 @@ class FridgeViewController: UIViewController {
     let fridgeService = FridgeService()
     
     @IBAction func didTapOnAddIngredientsButton() {
-        fridgeService.ingredients.append(ingredientsTextField.text!)
+        fridgeService.ingredients.append("- \(ingredientsTextField.text!)")
         ingredientsTextField.text?.removeAll()
     }
     @IBAction func didTapOnClearIngredientsButton() {
@@ -55,7 +55,6 @@ class FridgeViewController: UIViewController {
         {
             destinationViewController.recipesDataContainers = recipes.map { RecipeDataContainer(recipe: $0) }
         }
-        
     }
     
 }
@@ -69,6 +68,8 @@ extension FridgeViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell") else {
             return UITableViewCell()
         }
+        cell.textLabel?.textColor = .white
+        cell.textLabel?.font = UIFont(name: "Chalkduster", size: 24)
         cell.textLabel?.text = fridgeService.ingredients[indexPath.row]
         return cell
     }

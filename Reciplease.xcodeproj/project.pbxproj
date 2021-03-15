@@ -13,6 +13,7 @@
 		3F332D4C25C5087F00FA47CF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F332D4B25C5087F00FA47CF /* NetworkManager.swift */; };
 		3F332D5125C508A500FA47CF /* NetworkManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F332D5025C508A500FA47CF /* NetworkManagerError.swift */; };
 		3F332D5725C50C3B00FA47CF /* FridgeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F332D5625C50C3B00FA47CF /* FridgeResponse.swift */; };
+		3F9A28E925EC800F0079D5F7 /* RecipesDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9A28E825EC800F0079D5F7 /* RecipesDetailsViewController.swift */; };
 		3FC84EBD25BE4F34007A0889 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC84EBC25BE4F34007A0889 /* AppDelegate.swift */; };
 		3FC84EBF25BE4F34007A0889 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC84EBE25BE4F34007A0889 /* SceneDelegate.swift */; };
 		3FC84EC125BE4F34007A0889 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC84EC025BE4F34007A0889 /* FridgeViewController.swift */; };
@@ -48,6 +49,7 @@
 		3F332D4B25C5087F00FA47CF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		3F332D5025C508A500FA47CF /* NetworkManagerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerError.swift; sourceTree = "<group>"; };
 		3F332D5625C50C3B00FA47CF /* FridgeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeResponse.swift; sourceTree = "<group>"; };
+		3F9A28E825EC800F0079D5F7 /* RecipesDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesDetailsViewController.swift; sourceTree = "<group>"; };
 		3FC84EB925BE4F34007A0889 /* Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FC84EBC25BE4F34007A0889 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FC84EBE25BE4F34007A0889 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				3FC84ECA25BE4F36007A0889 /* LaunchScreen.storyboard */,
 				3FC84EC225BE4F34007A0889 /* Main.storyboard */,
 				3F323C0425D08F3900F27AAD /* RecipeTableViewCell.swift */,
+				3F9A28E825EC800F0079D5F7 /* RecipesDetailsViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F9A28E925EC800F0079D5F7 /* RecipesDetailsViewController.swift in Sources */,
 				3F332D4C25C5087F00FA47CF /* NetworkManager.swift in Sources */,
 				3F323C0525D08F3900F27AAD /* RecipeTableViewCell.swift in Sources */,
 				3F323C0025CFC0B000F27AAD /* RecipesViewController.swift in Sources */,

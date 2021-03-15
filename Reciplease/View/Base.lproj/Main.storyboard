@@ -312,11 +312,28 @@
                     <navigationItem key="navigationItem" id="55v-8e-kRI"/>
                     <connections>
                         <outlet property="recipesTableView" destination="8Ni-VA-eLK" id="hxQ-Oi-IcF"/>
+                        <segue destination="eRA-iA-FLd" kind="show" identifier="recipesList" id="Bt2-aZ-sIA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y8d-w0-UUv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3080" y="-91.706161137440759"/>
+        </scene>
+        <!--Recipes Details View Controller-->
+        <scene sceneID="cou-Jf-AfQ">
+            <objects>
+                <viewController id="eRA-iA-FLd" customClass="RecipesDetailsViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YuP-RI-U6Q">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="673"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="d4q-QO-vlJ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="r4K-CH-wSq"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vYr-20-ZZ7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3989" y="-91"/>
         </scene>
     </scenes>
     <resources>

@@ -11,8 +11,6 @@ class RecipeTableViewCell: UITableViewCell {
         }
     }
     
-    
-    
     func createGradientsEffect() {
         let gradient = CAGradientLayer()
         gradient.frame = recipeBackgroundImageView.bounds
@@ -24,6 +22,7 @@ class RecipeTableViewCell: UITableViewCell {
     func configure(recipeDataContainer: RecipeDataContainer) {
 
         let recipe = recipeDataContainer.recipe
+
         recipeTitleLabel.text = recipe.label
         recipeSubtitleLabel.text = recipe.ingredientLines?.first
         getImage(stringImage: recipe.image ?? "error")

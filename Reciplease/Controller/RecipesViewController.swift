@@ -38,17 +38,16 @@ extension RecipesViewController: UITableViewDataSource  {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recipesDataContainers.count
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCell") as? RecipeTableViewCell else {
             return UITableViewCell()
         }
-        
         let recipeDataContainer = recipesDataContainers[indexPath.row]
         
         cell.configure(recipeDataContainer: recipeDataContainer)
-        
         return cell
     }
     

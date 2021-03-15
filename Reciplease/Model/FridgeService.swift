@@ -7,6 +7,7 @@ protocol FridgeServiceDelegate: class {
 }
 
 class FridgeService {
+    var recipesDataContainers: [RecipeDataContainer] = []
 
     weak var delegate: FridgeServiceDelegate?
     
@@ -18,15 +19,14 @@ class FridgeService {
     
     func getRecipes(completion: @escaping (Result<FridgeResponse, NetworkManagerError>) -> Void) {
         let networkManager = NetworkManager()
-        
+        print(recipesDataContainers.first?.recipe.image ?? "error")
         guard let recipeURL = getRecipeURL() else {
             completion(.failure(.couldNotCreateUrl))
             return
         }
         networkManager.fetch(url: recipeURL, completion: completion)
+
     }
-    
-    
     
     func getRecipeURL() -> URL? {
         var urlComponents = URLComponents()
