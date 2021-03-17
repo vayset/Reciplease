@@ -33,7 +33,7 @@ class RecipesViewController: UIViewController {
             let destinationViewController = segue.destination as? RecipesDetailsViewController,
             let recipeDataContainer = sender as? RecipeDataContainer
         {
-            destinationViewController.recipeDataContainer = recipeDataContainer
+            destinationViewController.recipeDataContainer = [recipeDataContainer]
         }
 }
 
