@@ -101,7 +101,7 @@
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Cib-NA-UhM">
                                         <rect key="frame" x="0.0" y="0.0" width="360" height="328"/>
-                                        <color key="backgroundColor" red="0.2156862745" green="0.20000000000000001" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.21944883470000001" green="0.2000823021" blue="0.19607761500000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ingredientCell" id="A0g-LQ-NsS">
                                                 <rect key="frame" x="0.0" y="28" width="360" height="44"/>
@@ -340,12 +340,12 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fI3-TV-LSq">
                                         <rect key="frame" x="0.0" y="0.0" width="380" height="30.333333333333332"/>
                                         <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="24"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QD7-0i-rEE">
                                         <rect key="frame" x="0.0" y="35.333333333333314" width="380" height="267.66666666666669"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" red="0.21944883470000001" green="0.2000823021" blue="0.19607761500000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ingredientsCell" id="tNm-f7-gya">
                                                 <rect key="frame" x="0.0" y="28" width="380" height="43.666667938232422"/>
@@ -354,6 +354,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="380" height="43.666667938232422"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
+                                                <color key="backgroundColor" red="0.21944883470000001" green="0.2000823021" blue="0.19607761500000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
@@ -369,7 +370,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="d4q-QO-vlJ"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.21944883470000001" green="0.2000823021" blue="0.19607761500000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="mtA-vj-0dq" firstAttribute="centerX" secondItem="YuP-RI-U6Q" secondAttribute="centerX" id="NUq-7L-Acu"/>
                             <constraint firstItem="Id7-0L-cot" firstAttribute="leading" secondItem="d4q-QO-vlJ" secondAttribute="leading" constant="40" id="Obr-2M-rQ6"/>

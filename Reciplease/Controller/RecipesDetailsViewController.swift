@@ -8,7 +8,7 @@
 import UIKit
 
 class RecipesDetailsViewController: UIViewController {
-//    var recipeDataContainer: RecipeDataContainer?
+
     var recipeDataContainer: [RecipeDataContainer] = []
     @IBOutlet weak var recipeTitleLabel: UILabel!
     @IBOutlet weak var recipeImageView: UIImageView!
@@ -18,47 +18,36 @@ class RecipesDetailsViewController: UIViewController {
         super.viewDidLoad()
         ingredientsTableView.delegate = self
         ingredientsTableView.dataSource = self
+        setupUI()
     }
     
     
-    private func setupUI(recipeDataContainer: RecipeDataContainer) {
+    private func setupUI() {
         recipeTitleLabel.text = recipeDataContainer.first?.recipe.label
         if let photoData = recipeDataContainer.first?.photo {
+            print(photoData)
             recipeImageView.image = UIImage(data: photoData)
         }
        
     }
-
 }
 
 extension RecipesDetailsViewController: UITableViewDataSource {
-    // 1
-     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return recipeDataContainer.first?.recipe.ingredientLines?.count ?? 222
+        
     }
-
-    // 2
-     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipeDataContainer.count
-    }
-
-    // 3
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientsCell", for: indexPath)
-
-        cell.textLabel?.text = recipeDataContainer.first?.recipe.label
-        cell.textLabel?.text = recipeDataContainer.first?.recipe.source
-        cell.textLabel?.text = recipeDataContainer.first?.recipe.source
-        cell.textLabel?.text = recipeDataContainer.first?.recipe.source
-        cell.textLabel?.text = recipeDataContainer.first?.recipe.source
-        cell.textLabel?.text = recipeDataContainer.first?.recipe.source
-
-
-
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientsCell") else {
+            return UITableViewCell()
+        }
+        
+        cell.textLabel?.text = recipeDataContainer.first?.recipe.ingredientLines![indexPath.row]
         return cell
     }
-    
-    
+
     
 }
 
