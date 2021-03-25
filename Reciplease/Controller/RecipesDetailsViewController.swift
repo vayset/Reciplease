@@ -23,11 +23,19 @@ class RecipesDetailsViewController: UIViewController {
     }
     
     @IBAction func getDirectionsUIButton(_ sender: Any) {
-        
+        if let url = URL(string: (recipeDataContainer.first?.recipe.url)!) {
+            UIApplication.shared.open(url)
+        }
     }
     
     func createGradientsEffect() {
-
+        let colorBrown = UIColor(red: 57/255, green: 51/255, blue: 50/255, alpha: 1.0)
+        let gradient = CAGradientLayer()
+        gradient.frame = recipeImageView.bounds
+        gradient.colors = [UIColor.clear.cgColor, colorBrown.cgColor]
+        gradient.frame = recipeImageView.bounds
+        gradient.locations = [0.2, 1.1]
+        recipeImageView.layer.addSublayer(gradient)
     }
     
     private func setupUI() {
@@ -37,13 +45,7 @@ class RecipesDetailsViewController: UIViewController {
             recipeImageView.image = UIImage(data: photoData)
         }
         getDirectionsOutlet.layer.cornerRadius = 5
-        let colorBrown = UIColor(red: 57/255, green: 51/255, blue: 50/255, alpha: 1.0)
-        let gradient = CAGradientLayer()
-        gradient.frame = recipeImageView.bounds
-        gradient.colors = [UIColor.clear.cgColor, colorBrown.cgColor]
-        gradient.frame = recipeImageView.bounds
-        gradient.locations = [0.2, 1.1]
-        recipeImageView.layer.addSublayer(gradient)
+        createGradientsEffect()
     }
     
 
