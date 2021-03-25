@@ -2,19 +2,24 @@ import UIKit
 
 class FridgeViewController: UIViewController {
     
+    @IBOutlet weak var ingredientsTextField: UITextField!
+    @IBOutlet weak var ingredientsTableView: UITableView!
+    @IBOutlet weak var addIngredientsUIButton: UIButton!
+    @IBOutlet weak var clearIngredientsUIButton: UIButton!
+    @IBOutlet weak var searchRecipesUIButton: UIButton!
+    
+    let fridgeService = FridgeService.shared
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         fridgeService.delegate = self
         ingredientsTableView.dataSource = self
         ingredientsTableView.delegate = self
-        
+        setupUI()
+        setupTextViewToolBar()
     }
     
-    @IBOutlet weak var ingredientsTextField: UITextField!
-    @IBOutlet weak var ingredientsTableView: UITableView!
-
-    let fridgeService = FridgeService.shared
     
     @IBAction func didTapOnAddIngredientsButton() {
         fridgeService.ingredients.append("- \(ingredientsTextField.text!)")
@@ -25,6 +30,29 @@ class FridgeViewController: UIViewController {
     }
     @IBAction func didTapOnSearchRecipesButton() {
         fridgeService.getRecipes(completion: handleRecipesFetchResponse(fridgeResponse:))
+    }
+    
+    func setupUI() {
+        addIngredientsUIButton.layer.cornerRadius = 5
+        clearIngredientsUIButton.layer.cornerRadius = 5
+        searchRecipesUIButton.layer.cornerRadius = 5
+    }
+    
+    private func setupTextViewToolBar() {
+        let toolBar = UIToolbar(
+            frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 35)
+        )
+        
+        toolBar.items = [
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(closeKeyboard))
+        ]
+
+        ingredientsTextField.inputAccessoryView = toolBar
+    }
+    
+    @objc private func closeKeyboard() {
+        ingredientsTextField.resignFirstResponder()
     }
     
     private func handleRecipesFetchResponse(fridgeResponse: Result<FridgeResponse, NetworkManagerError>) {

@@ -51,7 +51,7 @@ class FridgeService {
     
     
     
-    func fetchRecipesPhotos(recipesDataContainers: [RecipeDataContainer]) {
+    func fetchRecipesPhotos(recipesDataContainers: [RecipeDataContainer], completion: @escaping () -> Void) {
         for recipesDataContainer in recipesDataContainers {
             guard
                 let recipeImageUrlString = recipesDataContainer.recipe.image,
@@ -63,6 +63,7 @@ class FridgeService {
                 switch result {
                 case .success(let imageData):
                     recipesDataContainer.photo = imageData
+                    completion()
                 case .failure(let error):
                     print("Could not fetch recipe photo data with error: \(error.localizedDescription)")
                 }

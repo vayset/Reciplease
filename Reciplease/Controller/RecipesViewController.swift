@@ -11,7 +11,14 @@ import Foundation
 
 class RecipesViewController: UIViewController {
     
-    var recipesDataContainers: [RecipeDataContainer] = []
+    var recipesDataContainers: [RecipeDataContainer] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.recipesTableView.reloadData()
+            }
+            
+        }
+    }
     
     private let fridgeService = FridgeService.shared
     
@@ -22,7 +29,11 @@ class RecipesViewController: UIViewController {
         recipesTableView.dataSource = self
         recipesTableView.delegate = self
         
-        fridgeService.fetchRecipesPhotos(recipesDataContainers: recipesDataContainers)
+        fridgeService.fetchRecipesPhotos(recipesDataContainers: recipesDataContainers) {
+            DispatchQueue.main.async {
+                self.recipesTableView.reloadData()
+            }
+        }
         
     }
     

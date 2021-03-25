@@ -13,6 +13,7 @@ class RecipesDetailsViewController: UIViewController {
     @IBOutlet weak var recipeTitleLabel: UILabel!
     @IBOutlet weak var recipeImageView: UIImageView!
     @IBOutlet weak var ingredientsTableView: UITableView!
+    @IBOutlet weak var getDirectionsOutlet: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,13 @@ class RecipesDetailsViewController: UIViewController {
         setupUI()
     }
     
+    @IBAction func getDirectionsUIButton(_ sender: Any) {
+        
+    }
+    
+    func createGradientsEffect() {
+
+    }
     
     private func setupUI() {
         recipeTitleLabel.text = recipeDataContainer.first?.recipe.label
@@ -28,8 +36,17 @@ class RecipesDetailsViewController: UIViewController {
             print(photoData)
             recipeImageView.image = UIImage(data: photoData)
         }
-       
+        getDirectionsOutlet.layer.cornerRadius = 5
+        let colorBrown = UIColor(red: 57/255, green: 51/255, blue: 50/255, alpha: 1.0)
+        let gradient = CAGradientLayer()
+        gradient.frame = recipeImageView.bounds
+        gradient.colors = [UIColor.clear.cgColor, colorBrown.cgColor]
+        gradient.frame = recipeImageView.bounds
+        gradient.locations = [0.2, 1.1]
+        recipeImageView.layer.addSublayer(gradient)
     }
+    
+
 }
 
 extension RecipesDetailsViewController: UITableViewDataSource {
@@ -43,8 +60,13 @@ extension RecipesDetailsViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientsCell") else {
             return UITableViewCell()
         }
+        let cellText = "- \(recipeDataContainer.first?.recipe.ingredientLines![indexPath.row] ?? "Error")"
         
-        cell.textLabel?.text = recipeDataContainer.first?.recipe.ingredientLines![indexPath.row]
+
+        cell.textLabel?.textColor = .white
+        cell.textLabel?.font = UIFont(name: "Chalkduster", size: 15.0)
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.text = cellText
         return cell
     }
 

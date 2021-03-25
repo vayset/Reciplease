@@ -21,9 +21,10 @@
 		3FC84EC725BE4F34007A0889 /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3FC84EC525BE4F34007A0889 /* Reciplease.xcdatamodeld */; };
 		3FC84EC925BE4F36007A0889 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FC84EC825BE4F36007A0889 /* Assets.xcassets */; };
 		3FC84ECC25BE4F36007A0889 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FC84ECA25BE4F36007A0889 /* LaunchScreen.storyboard */; };
-		3FC84ED725BE4F36007A0889 /* RecipleaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC84ED625BE4F36007A0889 /* RecipleaseTests.swift */; };
+		3FC84ED725BE4F36007A0889 /* TimeConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC84ED625BE4F36007A0889 /* TimeConverterTests.swift */; };
 		3FC84EE225BE4F36007A0889 /* RecipleaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC84EE125BE4F36007A0889 /* RecipleaseUITests.swift */; };
 		3FC9A94D25FFDA4E003B3F82 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FC9A94B25FFDA4E003B3F82 /* Main.storyboard */; };
+		3FC9A95B260A2BF9003B3F82 /* TimeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9A95A260A2BF9003B3F82 /* TimeConverter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,12 +62,13 @@
 		3FC84ECB25BE4F36007A0889 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3FC84ECD25BE4F36007A0889 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FC84ED225BE4F36007A0889 /* RecipleaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipleaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3FC84ED625BE4F36007A0889 /* RecipleaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipleaseTests.swift; sourceTree = "<group>"; };
+		3FC84ED625BE4F36007A0889 /* TimeConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeConverterTests.swift; sourceTree = "<group>"; };
 		3FC84ED825BE4F36007A0889 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FC84EDD25BE4F36007A0889 /* RecipleaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipleaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FC84EE125BE4F36007A0889 /* RecipleaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipleaseUITests.swift; sourceTree = "<group>"; };
 		3FC84EE325BE4F36007A0889 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FC9A94C25FFDA4E003B3F82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3FC9A95A260A2BF9003B3F82 /* TimeConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeConverter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				3F332D5625C50C3B00FA47CF /* FridgeResponse.swift */,
 				3F332D5525C50C0F00FA47CF /* Network */,
 				3F9A299825FFCE470079D5F7 /* RecipeDataContainer.swift */,
+				3FC9A95A260A2BF9003B3F82 /* TimeConverter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -180,7 +183,7 @@
 		3FC84ED525BE4F36007A0889 /* RecipleaseTests */ = {
 			isa = PBXGroup;
 			children = (
-				3FC84ED625BE4F36007A0889 /* RecipleaseTests.swift */,
+				3FC84ED625BE4F36007A0889 /* TimeConverterTests.swift */,
 				3FC84ED825BE4F36007A0889 /* Info.plist */,
 			);
 			path = RecipleaseTests;
@@ -329,6 +332,7 @@
 				3F332D4C25C5087F00FA47CF /* NetworkManager.swift in Sources */,
 				3F323C0525D08F3900F27AAD /* RecipeTableViewCell.swift in Sources */,
 				3F323C0025CFC0B000F27AAD /* RecipesViewController.swift in Sources */,
+				3FC9A95B260A2BF9003B3F82 /* TimeConverter.swift in Sources */,
 				3F332D4725C4D7D500FA47CF /* FridgeService.swift in Sources */,
 				3F9A299925FFCE470079D5F7 /* RecipeDataContainer.swift in Sources */,
 				3FC84EC725BE4F34007A0889 /* Reciplease.xcdatamodeld in Sources */,
@@ -344,7 +348,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3FC84ED725BE4F36007A0889 /* RecipleaseTests.swift in Sources */,
+				3FC84ED725BE4F36007A0889 /* TimeConverterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -3,6 +3,8 @@ import UIKit
 
 class RecipeTableViewCell: UITableViewCell {
     
+
+    @IBOutlet weak var cookingTimeLabel: UILabel!
     @IBOutlet private weak var recipeTitleLabel: UILabel!
     @IBOutlet private weak var recipeSubtitleLabel: UILabel!
     @IBOutlet private weak var recipeBackgroundImageView: UIImageView! {
@@ -21,7 +23,13 @@ class RecipeTableViewCell: UITableViewCell {
    
     func configure(recipeDataContainer: RecipeDataContainer) {
 
+
+        
         let recipe = recipeDataContainer.recipe
+        
+        if let totalTime = recipe.totalTime {
+            cookingTimeLabel.text = timeConverter.formatTotaltime(totalTime)
+        }
 
         recipeTitleLabel.text = recipe.label
         recipeSubtitleLabel.text = recipe.ingredientLines?.first
@@ -34,4 +42,7 @@ class RecipeTableViewCell: UITableViewCell {
 
     
     
+    let timeConverter = TimeConverter()
 }
+
+
