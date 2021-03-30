@@ -440,7 +440,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Reciplease" id="r4K-CH-wSq">
                         <barButtonItem key="backBarButtonItem" title="I" id="ITD-04-Zea"/>
-                        <barButtonItem key="rightBarButtonItem" image="star" catalog="system" id="qk4-c4-T0n"/>
+                        <barButtonItem key="rightBarButtonItem" image="star" catalog="system" id="qk4-c4-T0n">
+                            <connections>
+                                <action selector="didTapAddFavorite:" destination="eRA-iA-FLd" id="iI1-Z6-AkP"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="getDirectionsOutlet" destination="Id7-0L-cot" id="zHU-Sx-xcr"/>

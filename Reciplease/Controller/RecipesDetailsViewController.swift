@@ -9,7 +9,7 @@ import UIKit
 
 class RecipesDetailsViewController: UIViewController {
 
-    var recipeDataContainer: [RecipeDataContainer] = []
+    var recipeDataContainer: RecipeDataContainer?
     @IBOutlet weak var recipeTitleLabel: UILabel!
     @IBOutlet weak var recipeImageView: UIImageView!
     @IBOutlet weak var ingredientsTableView: UITableView!
@@ -23,7 +23,11 @@ class RecipesDetailsViewController: UIViewController {
     }
     
     @IBAction func getDirectionsUIButton(_ sender: Any) {
-        if let url = URL(string: (recipeDataContainer.first?.recipe.url)!) {
+        
+        if
+            let urlString = recipeDataContainer?.recipe.url,
+            let url = URL(string: urlString) {
+                
             UIApplication.shared.open(url)
         }
     }
@@ -38,9 +42,15 @@ class RecipesDetailsViewController: UIViewController {
         recipeImageView.layer.addSublayer(gradient)
     }
     
+    @IBAction func didTapAddFavorite(_ sender: Any) {
+        if let recipeToFavorite = recipeDataContainer?.recipe {
+            coreDataManager.createRecipe(recipe: recipeToFavorite)
+        }
+        
+    }
     private func setupUI() {
-        recipeTitleLabel.text = recipeDataContainer.first?.recipe.label
-        if let photoData = recipeDataContainer.first?.photo {
+        recipeTitleLabel.text = recipeDataContainer?.recipe.label
+        if let photoData = recipeDataContainer?.photo {
             print(photoData)
             recipeImageView.image = UIImage(data: photoData)
         }
@@ -48,13 +58,15 @@ class RecipesDetailsViewController: UIViewController {
         createGradientsEffect()
     }
     
+    
+    private let coreDataManager = RecipeCoreDataManager.shared
 
 }
 
 extension RecipesDetailsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipeDataContainer.first?.recipe.ingredientLines?.count ?? 222
+        return recipeDataContainer?.recipe.ingredientLines?.count ?? 0
         
     }
     
@@ -62,7 +74,7 @@ extension RecipesDetailsViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientsCell") else {
             return UITableViewCell()
         }
-        let cellText = "- \(recipeDataContainer.first?.recipe.ingredientLines![indexPath.row] ?? "Error")"
+        let cellText = "- \(recipeDataContainer?.recipe.ingredientLines![indexPath.row] ?? "Error")"
         
 
         cell.textLabel?.textColor = .white

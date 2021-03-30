@@ -19,8 +19,9 @@ class RecipesViewController: UIViewController {
             
         }
     }
-    
+    var shouldDisplayFavorites = true
     private let fridgeService = FridgeService.shared
+    private let coreDataManager = RecipeCoreDataManager.shared
     
     @IBOutlet weak var recipesTableView: UITableView!
     
@@ -29,11 +30,19 @@ class RecipesViewController: UIViewController {
         recipesTableView.dataSource = self
         recipesTableView.delegate = self
         
+        if shouldDisplayFavorites {
+            recipesDataContainers = coreDataManager.readRecipes().map {
+                RecipeDataContainer(recipe: $0)
+            }
+        }
+        
         fridgeService.fetchRecipesPhotos(recipesDataContainers: recipesDataContainers) {
             DispatchQueue.main.async {
                 self.recipesTableView.reloadData()
             }
         }
+        
+
         
     }
     
@@ -44,7 +53,7 @@ class RecipesViewController: UIViewController {
             let destinationViewController = segue.destination as? RecipesDetailsViewController,
             let recipeDataContainer = sender as? RecipeDataContainer
         {
-            destinationViewController.recipeDataContainer = [recipeDataContainer]
+            destinationViewController.recipeDataContainer = recipeDataContainer
         }
 }
 

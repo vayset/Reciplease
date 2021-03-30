@@ -81,7 +81,9 @@ class FridgeViewController: UIViewController {
             let recipes = sender as? [Recipe]
         {
             destinationViewController.recipesDataContainers = recipes.map { RecipeDataContainer(recipe: $0) }
+            destinationViewController.shouldDisplayFavorites = false
         }
+        
     }
     
 }
