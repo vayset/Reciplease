@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="RecipeEntity" representedClassName=".RecipeEntity" syncable="YES" codeGenerationType="class">
+    <entity name="RecipeEntity" representedClassName=".RecipeEntity" syncable="YES" codeGenerationType="category">
+        <attribute name="imageData" optional="YES" attributeType="Binary"/>
         <attribute name="label" optional="YES" attributeType="String"/>
         <fetchedProperty name="fetchedProperty" optional="YES">
             <fetchRequest name="fetchedPropertyFetchRequest" entity="RecipeEntity"/>
         </fetchedProperty>
     </entity>
     <elements>
-        <element name="RecipeEntity" positionX="-45" positionY="0" width="128" height="65"/>
+        <element name="RecipeEntity" positionX="-45" positionY="0" width="128" height="80"/>
     </elements>
 </model>

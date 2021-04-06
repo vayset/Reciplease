@@ -30,10 +30,14 @@ class RecipesViewController: UIViewController {
         recipesTableView.dataSource = self
         recipesTableView.delegate = self
         
+    
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         if shouldDisplayFavorites {
-            recipesDataContainers = coreDataManager.readRecipes().map {
-                RecipeDataContainer(recipe: $0)
-            }
+            recipesDataContainers = coreDataManager.readRecipes().reversed()
         }
         
         fridgeService.fetchRecipesPhotos(recipesDataContainers: recipesDataContainers) {
@@ -41,9 +45,6 @@ class RecipesViewController: UIViewController {
                 self.recipesTableView.reloadData()
             }
         }
-        
-
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

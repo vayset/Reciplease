@@ -160,10 +160,10 @@
             </objects>
             <point key="canvasLocation" x="2207.2463768115945" y="-90.401785714285708"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--View Controller-->
         <scene sceneID="JQS-bp-VUL">
             <objects>
-                <tabBarController id="Dil-Kv-EoW" sceneMemberID="viewController">
+                <tabBarController id="Dil-Kv-EoW" customClass="ViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="fqu-ac-E8c">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -261,7 +261,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="SME-cy-aMj">
-                                                                    <rect key="frame" x="0.0" y="28.666666666666664" width="349" height="28.666666666666664"/>
+                                                                    <rect key="frame" x="0.0" y="28.666666666666671" width="349" height="28.666666666666671"/>
                                                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                                     <color key="textColor" red="0.99997812509999995" green="0.99207359549999996" blue="0.99607950450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <nil key="highlightedColor"/>
@@ -442,11 +442,12 @@
                         <barButtonItem key="backBarButtonItem" title="I" id="ITD-04-Zea"/>
                         <barButtonItem key="rightBarButtonItem" image="star" catalog="system" id="qk4-c4-T0n">
                             <connections>
-                                <action selector="didTapAddFavorite:" destination="eRA-iA-FLd" id="iI1-Z6-AkP"/>
+                                <action selector="didTapFavoriteButton:" destination="eRA-iA-FLd" id="iI1-Z6-AkP"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="favoriteBarButtonItem" destination="qk4-c4-T0n" id="KCa-H5-9vG"/>
                         <outlet property="getDirectionsOutlet" destination="Id7-0L-cot" id="zHU-Sx-xcr"/>
                         <outlet property="ingredientsTableView" destination="QD7-0i-rEE" id="O1d-hU-G6q"/>
                         <outlet property="recipeImageView" destination="buT-vG-e0F" id="GB2-BA-dMJ"/>

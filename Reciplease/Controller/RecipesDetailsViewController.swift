@@ -14,12 +14,19 @@ class RecipesDetailsViewController: UIViewController {
     @IBOutlet weak var recipeImageView: UIImageView!
     @IBOutlet weak var ingredientsTableView: UITableView!
     @IBOutlet weak var getDirectionsOutlet: UIButton!
+    @IBOutlet weak var favoriteBarButtonItem: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         ingredientsTableView.delegate = self
         ingredientsTableView.dataSource = self
         setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        updateFavoriteBarButtonIcon()
     }
     
     @IBAction func getDirectionsUIButton(_ sender: Any) {
@@ -32,22 +39,54 @@ class RecipesDetailsViewController: UIViewController {
         }
     }
     
+    var gradient: CAGradientLayer?
+    
     func createGradientsEffect() {
         let colorBrown = UIColor(red: 57/255, green: 51/255, blue: 50/255, alpha: 1.0)
-        let gradient = CAGradientLayer()
-        gradient.frame = recipeImageView.bounds
-        gradient.colors = [UIColor.clear.cgColor, colorBrown.cgColor]
-        gradient.frame = recipeImageView.bounds
-        gradient.locations = [0.2, 1.1]
-        recipeImageView.layer.addSublayer(gradient)
+        gradient = CAGradientLayer()
+        gradient?.frame = recipeImageView.bounds
+        gradient?.colors = [UIColor.clear.cgColor, colorBrown.cgColor]
+        gradient?.frame = recipeImageView.bounds
+        gradient?.locations = [0.2, 1.1]
+        if let gradient = gradient {
+            recipeImageView.layer.addSublayer(gradient)
+        }
     }
     
-    @IBAction func didTapAddFavorite(_ sender: Any) {
-        if let recipeToFavorite = recipeDataContainer?.recipe {
-            coreDataManager.createRecipe(recipe: recipeToFavorite)
+    @IBAction func didTapFavoriteButton(_ sender: Any) {
+        guard let recipeToFavoriteContainer = recipeDataContainer else { return }
+        
+        if !getIsRecipeFavorited(recipe: recipeToFavoriteContainer.recipe) {
+            coreDataManager.createRecipe(recipeDataContainer: recipeToFavoriteContainer)
+        } else {
+            coreDataManager.deleteRecipe(with: recipeToFavoriteContainer.recipe.label!)
+        }
+        updateFavoriteBarButtonIcon()
+    }
+    
+    private func updateFavoriteBarButtonIcon() {
+        guard let recipeToFavoriteContainer = recipeDataContainer else { return }
+        
+        if getIsRecipeFavorited(recipe: recipeToFavoriteContainer.recipe) {
+            favoriteBarButtonItem.image = UIImage(systemName: "star.fill")
+        } else {
+            favoriteBarButtonItem.image = UIImage(systemName: "star")
         }
         
     }
+    
+    
+    private func getIsRecipeFavorited(recipe: Recipe) -> Bool {
+        
+        let storedRecipes = coreDataManager.readRecipes()
+        
+        for recipeDataContainer in storedRecipes where recipeDataContainer.recipe.label == recipe.label {
+            return true
+        }
+        
+        return false
+    }
+    
     private func setupUI() {
         recipeTitleLabel.text = recipeDataContainer?.recipe.label
         if let photoData = recipeDataContainer?.photo {
@@ -56,6 +95,14 @@ class RecipesDetailsViewController: UIViewController {
         }
         getDirectionsOutlet.layer.cornerRadius = 5
         createGradientsEffect()
+    }
+    
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        gradient?.frame = recipeImageView.bounds
+        
     }
     
     

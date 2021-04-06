@@ -9,10 +9,11 @@ class RecipeCoreDataManager {
     
     // MARK: - INTERNAL
     
-    func createRecipe(recipe: Recipe) {
+    func createRecipe(recipeDataContainer: RecipeDataContainer) {
         let recipeEntity = RecipeEntity(context: viewContext)
-        recipeEntity.label = recipe.label
-        
+        recipeEntity.label = recipeDataContainer.recipe.label
+        recipeEntity.imageData = recipeDataContainer.photo
+    
         do {
             try viewContext.save()
         } catch {
@@ -20,10 +21,24 @@ class RecipeCoreDataManager {
         }
     }
     
-    func readRecipes() -> [Recipe] {
+    func deleteRecipe(with title: String) {
+        let recipeEntities = getStoredRecipeEntities()
+        
+        for recipeEntity in recipeEntities where recipeEntity.label == title {
+            viewContext.delete(recipeEntity)
+        }
+        
+        saveContext()
+        
+    }
+    
+    func readRecipes() -> [RecipeDataContainer] {
         return getStoredRecipeEntities().map {
-            Recipe(uri: nil, label: $0.label, image: nil, source: nil, url: nil, shareAs: nil, yield: nil, dietLabels: nil, ingredientLines: nil, calories: nil, totalWeight: nil, totalTime: nil)
             
+            let recipe = Recipe(uri: nil, label: $0.label, image: nil, source: nil, url: nil, shareAs: nil, yield: nil, dietLabels: nil, ingredientLines: nil, calories: nil, totalWeight: nil, totalTime: nil)
+            let photoData = $0.imageData
+            
+            return RecipeDataContainer(recipe: recipe, photo: photoData)
         }
     }
     
@@ -31,17 +46,7 @@ class RecipeCoreDataManager {
         print("Is not implemented")
     }
     
-    
-    func deleteAllTexts() {
-        let recipeEntities = getStoredRecipeEntities()
-        
-        for recipeEntity in recipeEntities {
-            viewContext.delete(recipeEntity)
-        }
-        
-        saveContext()
-    }
-    
+
     
     
     
@@ -52,7 +57,7 @@ class RecipeCoreDataManager {
 
     private lazy var persistentContainer: NSPersistentContainer = {
      
-        let container = NSPersistentContainer(name: "Projet_dominer_le_monde")
+        let container = NSPersistentContainer(name: "Reciplease")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")

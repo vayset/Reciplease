@@ -7,24 +7,37 @@ class RecipeTableViewCell: UITableViewCell {
     @IBOutlet weak var cookingTimeLabel: UILabel!
     @IBOutlet private weak var recipeTitleLabel: UILabel!
     @IBOutlet private weak var recipeSubtitleLabel: UILabel!
-    @IBOutlet private weak var recipeBackgroundImageView: UIImageView! {
-        didSet {
-            createGradientsEffect()
+    @IBOutlet private weak var recipeBackgroundImageView: UIImageView!
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        gradient?.frame = recipeBackgroundImageView.bounds
+    }
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        createGradientsEffect()
+    }
+    
+    
+    var gradient: CAGradientLayer?
+    
+    private func createGradientsEffect() {
+        gradient = CAGradientLayer()
+        gradient?.frame = recipeBackgroundImageView.bounds
+        gradient?.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradient?.locations = [0.2, 1.1]
+        if let gradient = gradient {
+            recipeBackgroundImageView.layer.addSublayer(gradient)
         }
     }
     
-    func createGradientsEffect() {
-        let gradient = CAGradientLayer()
-        gradient.frame = recipeBackgroundImageView.bounds
-        gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-        gradient.locations = [0.2, 1.1]
-        recipeBackgroundImageView.layer.addSublayer(gradient)
-    }
-   
     func configure(recipeDataContainer: RecipeDataContainer) {
 
 
-        
         let recipe = recipeDataContainer.recipe
         
         if let totalTime = recipe.totalTime {
