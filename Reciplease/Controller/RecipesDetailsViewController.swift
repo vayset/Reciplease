@@ -15,12 +15,18 @@ class RecipesDetailsViewController: UIViewController {
     @IBOutlet weak var ingredientsTableView: UITableView!
     @IBOutlet weak var getDirectionsOutlet: UIButton!
     @IBOutlet weak var favoriteBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var cookingTimeLabel: UILabel!
+    @IBOutlet weak var cookingTimeView: UIView!
+    
+    let timeConverter = TimeConverter()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         ingredientsTableView.delegate = self
         ingredientsTableView.dataSource = self
         setupUI()
+        configure()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -95,6 +101,19 @@ class RecipesDetailsViewController: UIViewController {
         }
         getDirectionsOutlet.layer.cornerRadius = 5
         createGradientsEffect()
+        
+        cookingTimeView.layer.borderWidth = 1
+        cookingTimeView.layer.borderColor = UIColor.white.cgColor
+        cookingTimeView.layer.cornerRadius = 5
+    }
+    
+    func configure() {
+        let recipe = recipeDataContainer?.recipe
+        
+        if let totalTime = recipe?.totalTime {
+            cookingTimeLabel.text = timeConverter.formatTotaltime(totalTime)
+            print(totalTime)
+        }
     }
     
     

@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D09DA5F7-0E15-45BF-9A29-EF848009DA7D"
-            shouldBeEnabled = "Yes"
+            uuid = "A5987657-5A59-4AF2-9535-9609ED53D790"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Reciplease/Controller/FridgeViewController.swift"
+            filePath = "Reciplease/Controller/RecipesDetailsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "closeKeyboard()"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "configure()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

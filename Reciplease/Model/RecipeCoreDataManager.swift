@@ -13,6 +13,9 @@ class RecipeCoreDataManager {
         let recipeEntity = RecipeEntity(context: viewContext)
         recipeEntity.label = recipeDataContainer.recipe.label
         recipeEntity.imageData = recipeDataContainer.photo
+        recipeEntity.ingredientLines = recipeDataContainer.recipe.ingredientLines as NSObject?
+        recipeEntity.recipeUrl = recipeDataContainer.recipe.url
+        recipeEntity.totalTime = recipeDataContainer.recipe.totalTime as? NSDecimalNumber
     
         do {
             try viewContext.save()
@@ -35,7 +38,7 @@ class RecipeCoreDataManager {
     func readRecipes() -> [RecipeDataContainer] {
         return getStoredRecipeEntities().map {
             
-            let recipe = Recipe(uri: nil, label: $0.label, image: nil, source: nil, url: nil, shareAs: nil, yield: nil, dietLabels: nil, ingredientLines: nil, calories: nil, totalWeight: nil, totalTime: nil)
+            let recipe = Recipe(uri: nil, label: $0.label, image: nil, source: nil, url: $0.recipeUrl, shareAs: nil, yield: nil, dietLabels: nil, ingredientLines: $0.ingredientLines as? [String], calories: nil, totalWeight: nil, totalTime: $0.totalTime as? Int)
             let photoData = $0.imageData
             
             return RecipeDataContainer(recipe: recipe, photo: photoData)

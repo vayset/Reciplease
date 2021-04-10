@@ -4,6 +4,7 @@ import UIKit
 class RecipeTableViewCell: UITableViewCell {
     
 
+    @IBOutlet weak var cookingTimeView: UIView!
     @IBOutlet weak var cookingTimeLabel: UILabel!
     @IBOutlet private weak var recipeTitleLabel: UILabel!
     @IBOutlet private weak var recipeSubtitleLabel: UILabel!
@@ -11,7 +12,7 @@ class RecipeTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+        setupUI()
         gradient?.frame = recipeBackgroundImageView.bounds
     }
     
@@ -35,15 +36,20 @@ class RecipeTableViewCell: UITableViewCell {
         }
     }
     
+    func setupUI() {
+        cookingTimeView.layer.borderWidth = 1
+        cookingTimeView.layer.borderColor = UIColor.white.cgColor
+        cookingTimeView.layer.cornerRadius = 5
+    }
+    
     func configure(recipeDataContainer: RecipeDataContainer) {
-
+        
 
         let recipe = recipeDataContainer.recipe
         
         if let totalTime = recipe.totalTime {
             cookingTimeLabel.text = timeConverter.formatTotaltime(totalTime)
         }
-
         recipeTitleLabel.text = recipe.label
         recipeSubtitleLabel.text = recipe.ingredientLines?.first
         

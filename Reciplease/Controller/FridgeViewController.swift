@@ -9,7 +9,7 @@ class FridgeViewController: UIViewController {
     @IBOutlet weak var searchRecipesUIButton: UIButton!
     
     let fridgeService = FridgeService.shared
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +18,7 @@ class FridgeViewController: UIViewController {
         ingredientsTableView.delegate = self
         setupUI()
         setupTextViewToolBar()
+        
     }
     
     
@@ -36,6 +37,13 @@ class FridgeViewController: UIViewController {
         addIngredientsUIButton.layer.cornerRadius = 5
         clearIngredientsUIButton.layer.cornerRadius = 5
         searchRecipesUIButton.layer.cornerRadius = 5
+        
+        let bottomLine = CALayer()
+        bottomLine.frame = CGRect(x: 0, y: ingredientsTextField.frame.height, width: ingredientsTextField.frame.width, height: 1)
+        bottomLine.backgroundColor = UIColor(red: 153/255, green: 151/255, blue: 152/255, alpha: 1.0).cgColor
+        ingredientsTextField.layer.addSublayer(bottomLine)
+        
+        ingredientsTextField.attributedPlaceholder = NSAttributedString(string: "Lemon, Cheese, Sausages...", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
     }
     
     private func setupTextViewToolBar() {
@@ -47,7 +55,7 @@ class FridgeViewController: UIViewController {
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
             UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(closeKeyboard))
         ]
-
+        
         ingredientsTextField.inputAccessoryView = toolBar
     }
     
