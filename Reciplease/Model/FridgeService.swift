@@ -22,6 +22,10 @@ class FridgeService {
     }
     
     func getRecipes(completion: @escaping (Result<FridgeResponse, NetworkManagerError>) -> Void) {
+        guard !ingredients.isEmpty else {
+            completion(.failure(.unknownError))
+            return
+        }
         
         print(recipesDataContainers.first?.recipe.image ?? "error")
         guard let recipeURL = getRecipeURL() else {

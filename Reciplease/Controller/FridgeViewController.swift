@@ -7,12 +7,14 @@ class FridgeViewController: UIViewController {
     @IBOutlet weak var addIngredientsUIButton: UIButton!
     @IBOutlet weak var clearIngredientsUIButton: UIButton!
     @IBOutlet weak var searchRecipesUIButton: UIButton!
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
     let fridgeService = FridgeService.shared
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ingredientsTextField.delegate = self
         fridgeService.delegate = self
         ingredientsTableView.dataSource = self
         ingredientsTableView.delegate = self
@@ -21,15 +23,34 @@ class FridgeViewController: UIViewController {
         
     }
     
+    private func presentAlert() {
+        let alertController = UIAlertController(title: "Error", message: "blabla", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
     
     @IBAction func didTapOnAddIngredientsButton() {
-        fridgeService.ingredients.append("- \(ingredientsTextField.text!)")
+        
+        guard let ingredient = ingredientsTextField.text,
+              !ingredient.isEmpty
+        else {
+            presentAlert()
+            return
+        }
+        
+        fridgeService.ingredients.append(ingredientsTextField.text!)
         ingredientsTextField.text?.removeAll()
     }
     @IBAction func didTapOnClearIngredientsButton() {
         fridgeService.ingredients.removeAll()
     }
     @IBAction func didTapOnSearchRecipesButton() {
+        activityIndicatorView.startAnimating()
+        self.searchRecipesUIButton.setTitle("", for: .normal)
+        self.searchRecipesUIButton.isEnabled = false
+        
         fridgeService.getRecipes(completion: handleRecipesFetchResponse(fridgeResponse:))
     }
     
@@ -63,16 +84,21 @@ class FridgeViewController: UIViewController {
         ingredientsTextField.resignFirstResponder()
     }
     
+    
     private func handleRecipesFetchResponse(fridgeResponse: Result<FridgeResponse, NetworkManagerError>) {
         
         DispatchQueue.main.async {
             
+            self.activityIndicatorView.stopAnimating()
+            self.searchRecipesUIButton.setTitle("Search for recipes", for: .normal)
+            self.searchRecipesUIButton.isEnabled = true
+            
             switch fridgeResponse {
-            case .failure(let error):
-                print(error.localizedDescription)
+            case .failure( _):
+                self.presentAlert()
             case .success(let response):
                 guard let hits = response.hits else {
-                    // presentAlert
+                    self.presentAlert()
                     return
                 }
                 let recipes = hits.map({$0.recipe})
@@ -107,7 +133,7 @@ extension FridgeViewController: UITableViewDataSource {
         }
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont(name: "Chalkduster", size: 24)
-        cell.textLabel?.text = fridgeService.ingredients[indexPath.row]
+        cell.textLabel?.text = "- \(fridgeService.ingredients[indexPath.row])"
         return cell
     }
     
@@ -120,4 +146,11 @@ extension FridgeViewController: FridgeServiceDelegate {
         ingredientsTableView.reloadData()
     }
     
+}
+
+extension FridgeViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
 }

@@ -114,20 +114,37 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bKV-Lh-Yjj">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Axc-Gv-B28">
                                         <rect key="frame" x="0.0" y="358" width="360" height="80"/>
-                                        <color key="backgroundColor" red="0.34901960784313724" green="0.57647058823529407" blue="0.38431372549019605" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bKV-Lh-Yjj">
+                                                <rect key="frame" x="0.0" y="0.0" width="360" height="80"/>
+                                                <color key="backgroundColor" red="0.34901960784313724" green="0.57647058823529407" blue="0.38431372549019605" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="80" id="lCW-BQ-Cq0"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="30"/>
+                                                <state key="normal" title="Search for recipes">
+                                                    <color key="titleColor" red="0.99997812509999995" green="0.99207359549999996" blue="0.99607950450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="didTapOnSearchRecipesButton" destination="J5I-4z-5AP" eventType="touchUpInside" id="oz8-qo-Xzs"/>
+                                                </connections>
+                                            </button>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="NdQ-LI-YlC">
+                                                <rect key="frame" x="161.66666666666666" y="21.666666666666629" width="37" height="37"/>
+                                                <color key="color" systemColor="systemPinkColor"/>
+                                            </activityIndicatorView>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="80" id="lCW-BQ-Cq0"/>
+                                            <constraint firstAttribute="trailing" secondItem="bKV-Lh-Yjj" secondAttribute="trailing" id="EK8-jB-PNg"/>
+                                            <constraint firstItem="NdQ-LI-YlC" firstAttribute="centerY" secondItem="Axc-Gv-B28" secondAttribute="centerY" id="Oow-Qy-HTo"/>
+                                            <constraint firstItem="bKV-Lh-Yjj" firstAttribute="leading" secondItem="Axc-Gv-B28" secondAttribute="leading" id="V75-UE-bh4"/>
+                                            <constraint firstAttribute="bottom" secondItem="bKV-Lh-Yjj" secondAttribute="bottom" id="bRk-9o-lO2"/>
+                                            <constraint firstItem="NdQ-LI-YlC" firstAttribute="centerX" secondItem="Axc-Gv-B28" secondAttribute="centerX" id="sLp-5h-ebi"/>
+                                            <constraint firstItem="bKV-Lh-Yjj" firstAttribute="top" secondItem="Axc-Gv-B28" secondAttribute="top" id="uMo-m4-vwj"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="30"/>
-                                        <state key="normal" title="Search for recipes">
-                                            <color key="titleColor" red="0.99997812509999995" green="0.99207359549999996" blue="0.99607950450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="didTapOnSearchRecipesButton" destination="J5I-4z-5AP" eventType="touchUpInside" id="oz8-qo-Xzs"/>
-                                        </connections>
-                                    </button>
+                                    </view>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -148,6 +165,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Reciplease" id="zPK-G9-9KW"/>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="NdQ-LI-YlC" id="uyY-zj-sFL"/>
                         <outlet property="addIngredientsUIButton" destination="9Dh-p1-VuH" id="uoK-lb-zwS"/>
                         <outlet property="clearIngredientsUIButton" destination="Dgs-w6-FdB" id="X5m-dJ-3eH"/>
                         <outlet property="ingredientsTableView" destination="Cib-NA-UhM" id="Mrw-uW-rza"/>
@@ -183,7 +201,7 @@
         <!--Search-->
         <scene sceneID="EBP-1E-YUg">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZUM-xk-2LU" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZUM-xk-2LU" customClass="RecipleaseNavigationController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Search" id="zn2-Fy-pJX">
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
@@ -213,7 +231,7 @@
         <!--Favorite-->
         <scene sceneID="wdd-kD-SCa">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VQ3-to-vIg" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VQ3-to-vIg" customClass="RecipleaseNavigationController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Favorite" id="Yxz-PA-nwk"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="cOb-Zy-3wP">
@@ -510,13 +528,16 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Wmg-t0-Bth"/>
+        <segue reference="ITZ-Fv-zje"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="clock" catalog="system" width="128" height="121"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
