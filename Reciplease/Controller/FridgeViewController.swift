@@ -9,8 +9,8 @@ class FridgeViewController: UIViewController {
     @IBOutlet weak var searchRecipesUIButton: UIButton!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
-    let fridgeService = FridgeService.shared
-    
+    private let fridgeService = FridgeService.shared
+    private let alertManagerController = AlertManagerController.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,26 +23,28 @@ class FridgeViewController: UIViewController {
         
     }
     
-    private func presentAlert() {
-        let alertController = UIAlertController(title: "Error", message: "blabla", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
-        alertController.addAction(okAction)
-        present(alertController, animated: true, completion: nil)
-    }
-    
-    
     @IBAction func didTapOnAddIngredientsButton() {
         
-        guard let ingredient = ingredientsTextField.text,
-              !ingredient.isEmpty
-        else {
-            presentAlert()
+        guard let ingredient = ingredientsTextField.text else {
+            alertManagerController.presentSimpleAlert(from: self, message: "The text field is empty")
             return
         }
         
-        fridgeService.ingredients.append(ingredientsTextField.text!)
-        ingredientsTextField.text?.removeAll()
+        switch fridgeService.addIngredient(ingredient) {
+        case .failure(let error):
+            switch error {
+            case .failedToAddIngredientIsEmpty:
+                alertManagerController.presentSimpleAlert(from: self, message: "Failed to add ingredient because is empty")
+                return
+            case .failedToAddIngredientIsTooBig:
+                alertManagerController.presentSimpleAlert(from: self, message: "Failed to add ingredient because is toobig")
+                return
+            }
+            
+        case .success: ingredientsTextField.text?.removeAll()
+        }
     }
+    
     @IBAction func didTapOnClearIngredientsButton() {
         fridgeService.ingredients.removeAll()
     }
@@ -61,10 +63,10 @@ class FridgeViewController: UIViewController {
         
         let bottomLine = CALayer()
         bottomLine.frame = CGRect(x: 0, y: ingredientsTextField.frame.height, width: ingredientsTextField.frame.width, height: 1)
-        bottomLine.backgroundColor = UIColor(red: 153/255, green: 151/255, blue: 152/255, alpha: 1.0).cgColor
+        bottomLine.backgroundColor = UIColor(red: 153/255, green: 151/255, blue: 152/255, alpha: 0.6).cgColor
         ingredientsTextField.layer.addSublayer(bottomLine)
         
-        ingredientsTextField.attributedPlaceholder = NSAttributedString(string: "Lemon, Cheese, Sausages...", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        ingredientsTextField.attributedPlaceholder = NSAttributedString(string: "Lemon, Cheese, Sausages...", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray.withAlphaComponent(0.6)])
     }
     
     private func setupTextViewToolBar() {
@@ -95,13 +97,16 @@ class FridgeViewController: UIViewController {
             
             switch fridgeResponse {
             case .failure( _):
-                self.presentAlert()
+                self.alertManagerController.presentSimpleAlert(from: self, message: "Ingredient list is empty")
             case .success(let response):
-                guard let hits = response.hits else {
-                    self.presentAlert()
+                
+                let recipes = response.hits.map({$0.recipe})
+                
+                guard !recipes.isEmpty else {
+                    self.alertManagerController.presentSimpleAlert(from: self, message: "No recipe matched your ingredients")
                     return
                 }
-                let recipes = hits.map({$0.recipe})
+                
                 self.performSegue(withIdentifier: "goToRecipesSegue", sender: recipes)
             }
         }

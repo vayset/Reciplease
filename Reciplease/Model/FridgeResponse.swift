@@ -6,7 +6,7 @@ struct FridgeResponse: Codable {
     let from, to: Int?
     let more: Bool?
     let count: Int?
-    let hits: [Hit]?
+    let hits: [Hit]
 }
 
 // MARK: - Hit

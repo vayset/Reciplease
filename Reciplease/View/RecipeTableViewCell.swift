@@ -23,7 +23,7 @@ class RecipeTableViewCell: UITableViewCell {
         createGradientsEffect()
     }
     
-    
+    let timeConverter = TimeConverter()
     var gradient: CAGradientLayer?
     
     private func createGradientsEffect() {
@@ -43,7 +43,6 @@ class RecipeTableViewCell: UITableViewCell {
     }
     
     func configure(recipeDataContainer: RecipeDataContainer) {
-        
 
         let recipe = recipeDataContainer.recipe
         
@@ -56,12 +55,6 @@ class RecipeTableViewCell: UITableViewCell {
         if let photoData = recipeDataContainer.photo {
             recipeBackgroundImageView.image = UIImage(data: photoData)
         }
-        
+
     }
-
-    
-    
-    let timeConverter = TimeConverter()
 }
-
-

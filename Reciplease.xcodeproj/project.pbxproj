@@ -13,6 +13,7 @@
 		3F0CEB032622366500642F6D /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0CEB022622366500642F6D /* URLSessionMock.swift */; };
 		3F0D20C926261C7800E132BB /* RecipleaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D20C826261C7800E132BB /* RecipleaseNavigationController.swift */; };
 		3F0D20D326289FDE00E132BB /* AlertManagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D20D226289FDE00E132BB /* AlertManagerController.swift */; };
+		3F0D20E1262F6D7400E132BB /* FridgeServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D20E0262F6D7400E132BB /* FridgeServiceTests.swift */; };
 		3F323C0025CFC0B000F27AAD /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F323BFF25CFC0B000F27AAD /* RecipesViewController.swift */; };
 		3F323C0525D08F3900F27AAD /* RecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F323C0425D08F3900F27AAD /* RecipeTableViewCell.swift */; };
 		3F332D4725C4D7D500FA47CF /* FridgeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F332D4625C4D7D500FA47CF /* FridgeService.swift */; };
@@ -59,6 +60,7 @@
 		3F0CEB022622366500642F6D /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
 		3F0D20C826261C7800E132BB /* RecipleaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipleaseNavigationController.swift; sourceTree = "<group>"; };
 		3F0D20D226289FDE00E132BB /* AlertManagerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManagerController.swift; sourceTree = "<group>"; };
+		3F0D20E0262F6D7400E132BB /* FridgeServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeServiceTests.swift; sourceTree = "<group>"; };
 		3F323BFF25CFC0B000F27AAD /* RecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesViewController.swift; sourceTree = "<group>"; };
 		3F323C0425D08F3900F27AAD /* RecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableViewCell.swift; sourceTree = "<group>"; };
 		3F332D4625C4D7D500FA47CF /* FridgeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeService.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 			children = (
 				3F0CEAF1262233F400642F6D /* Mock */,
 				3FC84ED625BE4F36007A0889 /* TimeConverterTests.swift */,
+				3F0D20E0262F6D7400E132BB /* FridgeServiceTests.swift */,
 				3FC84ED825BE4F36007A0889 /* Info.plist */,
 			);
 			path = RecipleaseTests;
@@ -387,6 +390,7 @@
 			files = (
 				3F0CEB032622366500642F6D /* URLSessionMock.swift in Sources */,
 				3F0CEAFE262235F700642F6D /* UrlComponentsMock.swift in Sources */,
+				3F0D20E1262F6D7400E132BB /* FridgeServiceTests.swift in Sources */,
 				3FC84ED725BE4F36007A0889 /* TimeConverterTests.swift in Sources */,
 				3F0CEAF32622341D00642F6D /* NetworkManagerMock.swift in Sources */,
 			);

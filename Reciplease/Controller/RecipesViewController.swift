@@ -15,6 +15,7 @@ class RecipesViewController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.recipesTableView.reloadData()
+                self.noRecipeLabel.isHidden = !self.recipesDataContainers.isEmpty
             }
             
         }
@@ -22,21 +23,24 @@ class RecipesViewController: UIViewController {
     var shouldDisplayFavorites = true
     private let fridgeService = FridgeService.shared
     private let coreDataManager = RecipeCoreDataManager.shared
+    private let alertManagerController = AlertManagerController.shared
     
+    @IBOutlet weak var noRecipeLabel: UILabel!
     @IBOutlet weak var recipesTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         recipesTableView.dataSource = self
         recipesTableView.delegate = self
-        
-    
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if shouldDisplayFavorites {
+            if coreDataManager.readRecipes().isEmpty {
+                alertManagerController.presentSimpleAlert(from: self, message: "You have not ingredients in the favorite")
+            }
             recipesDataContainers = coreDataManager.readRecipes().reversed()
         }
         
@@ -45,19 +49,23 @@ class RecipesViewController: UIViewController {
                 self.recipesTableView.reloadData()
             }
         }
+        
+        
+        
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-
+        
         if
             let destinationViewController = segue.destination as? RecipesDetailsViewController,
             let recipeDataContainer = sender as? RecipeDataContainer
         {
             destinationViewController.recipeDataContainer = recipeDataContainer
         }
-}
-
+    }
+    
 }
 extension RecipesViewController: UITableViewDataSource  {
     
@@ -76,8 +84,6 @@ extension RecipesViewController: UITableViewDataSource  {
         cell.configure(recipeDataContainer: recipeDataContainer)
         return cell
     }
-
-    
 }
 
 extension RecipesViewController: UITableViewDelegate {
@@ -88,5 +94,4 @@ extension RecipesViewController: UITableViewDelegate {
         let recipeDataContainer = recipesDataContainers[indexPath.row]
         performSegue(withIdentifier: "recipesList", sender: recipeDataContainer)
     }
-    
 }

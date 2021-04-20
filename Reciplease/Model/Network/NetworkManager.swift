@@ -8,6 +8,8 @@ protocol NetworkManagerProtocol {
 
 
 class AlamofireNetworkManager: NetworkManagerProtocol {
+    
+    
     func fetch<T>(url: URL, completion: @escaping (Result<T, NetworkManagerError>) -> Void) where T : Decodable, T : Encodable {
         
     }
@@ -18,6 +20,8 @@ class AlamofireNetworkManager: NetworkManagerProtocol {
     
     
 }
+
+
 
 class NetworkManager: NetworkManagerProtocol {
     

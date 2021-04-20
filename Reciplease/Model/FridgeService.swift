@@ -6,6 +6,11 @@ protocol FridgeServiceDelegate: class {
     
 }
 
+enum FridgeServiceError: Error {
+    case failedToAddIngredientIsEmpty
+    case failedToAddIngredientIsTooBig
+}
+
 class FridgeService {
     static let shared = FridgeService()
     
@@ -13,12 +18,26 @@ class FridgeService {
 
     weak var delegate: FridgeServiceDelegate?
     
-    private let networkManager = NetworkManager()
+    private let networkManager: NetworkManagerProtocol = NetworkManager()
     
     var ingredients: [String] = [] {
         didSet {
             delegate?.didUpdateIngredients()
         }
+    }
+    
+    
+    func addIngredient(_ ingredient: String) -> Result<Void, FridgeServiceError> {
+        guard !ingredient.trimmingCharacters(in: .whitespaces).isEmpty else {
+            return .failure(.failedToAddIngredientIsEmpty)
+        }
+        
+        guard ingredient.count < 5 else {
+            return .failure(.failedToAddIngredientIsTooBig)
+        }
+        
+        ingredients.append(ingredient)
+        return .success(())
     }
     
     func getRecipes(completion: @escaping (Result<FridgeResponse, NetworkManagerError>) -> Void) {

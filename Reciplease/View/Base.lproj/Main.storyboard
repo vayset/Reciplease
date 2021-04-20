@@ -33,7 +33,7 @@
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="YDw-7s-Prq">
                                                         <rect key="frame" x="0.0" y="0.0" width="280" height="30"/>
-                                                        <color key="textColor" red="0.59999999999999998" green="0.59215686274509804" blue="0.59607843137254901" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" returnKeyType="continue"/>
                                                     </textField>
@@ -363,18 +363,27 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No recipes add some in search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLV-pC-Qpv">
+                                <rect key="frame" x="78.000000000000014" y="326.33333333333331" width="234.33333333333337" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="t1n-h4-46R"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="KLV-pC-Qpv" firstAttribute="centerY" secondItem="wt3-ex-xeX" secondAttribute="centerY" id="Gjs-mc-4sU"/>
                             <constraint firstItem="8Ni-VA-eLK" firstAttribute="leading" secondItem="t1n-h4-46R" secondAttribute="leading" id="TiR-7I-Imv"/>
                             <constraint firstItem="t1n-h4-46R" firstAttribute="trailing" secondItem="8Ni-VA-eLK" secondAttribute="trailing" id="mJg-Cs-mqZ"/>
+                            <constraint firstItem="KLV-pC-Qpv" firstAttribute="centerX" secondItem="wt3-ex-xeX" secondAttribute="centerX" id="oHk-Wm-Oss"/>
                             <constraint firstItem="t1n-h4-46R" firstAttribute="bottom" secondItem="8Ni-VA-eLK" secondAttribute="bottom" id="rGn-Uy-dBd"/>
                             <constraint firstItem="8Ni-VA-eLK" firstAttribute="top" secondItem="t1n-h4-46R" secondAttribute="top" id="zox-3S-Ak6"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Reciplease" id="55v-8e-kRI"/>
                     <connections>
+                        <outlet property="noRecipeLabel" destination="KLV-pC-Qpv" id="CFJ-WY-pay"/>
                         <outlet property="recipesTableView" destination="8Ni-VA-eLK" id="hxQ-Oi-IcF"/>
                         <segue destination="eRA-iA-FLd" kind="show" identifier="recipesList" id="Bt2-aZ-sIA"/>
                     </connections>
@@ -528,7 +537,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ITZ-Fv-zje"/>
+        <segue reference="Wmg-t0-Bth"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="clock" catalog="system" width="128" height="121"/>
