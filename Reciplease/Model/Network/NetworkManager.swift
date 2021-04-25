@@ -1,5 +1,5 @@
 import Foundation
-
+import Alamofire
 
 protocol NetworkManagerProtocol {
     func fetch<T : Codable>(url: URL, completion: @escaping (Result<T, NetworkManagerError>) -> Void)
