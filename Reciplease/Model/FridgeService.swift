@@ -9,16 +9,27 @@ protocol FridgeServiceDelegate: class {
 enum FridgeServiceError: Error {
     case failedToAddIngredientIsEmpty
     case failedToAddIngredientIsTooBig
+    case failedToGetRecipesIngredientIsEmpty
+    case failedToGetRecipesBackendError
+    case couldNotCreateUrl
 }
 
 class FridgeService {
     static let shared = FridgeService()
     
+    init(
+        networkManager: NetworkManagerProtocol = AlamofireNetworkManager(),
+        urlComponents: UrlComponentsProtocol = URLComponents()
+    ) {
+        self.networkManager = networkManager
+        self.urlComponents = urlComponents
+    }
+    
     var recipesDataContainers: [RecipeDataContainer] = []
-
+    
     weak var delegate: FridgeServiceDelegate?
     
-    private let networkManager: NetworkManagerProtocol = NetworkManager()
+    private let networkManager: NetworkManagerProtocol
     
     var ingredients: [String] = [] {
         didSet {
@@ -31,32 +42,42 @@ class FridgeService {
         guard !ingredient.trimmingCharacters(in: .whitespaces).isEmpty else {
             return .failure(.failedToAddIngredientIsEmpty)
         }
-        
-        guard ingredient.count < 5 else {
-            return .failure(.failedToAddIngredientIsTooBig)
-        }
-        
         ingredients.append(ingredient)
         return .success(())
     }
     
-    func getRecipes(completion: @escaping (Result<FridgeResponse, NetworkManagerError>) -> Void) {
+    func getRecipes(completion: @escaping (Result<[Recipe], FridgeServiceError>) -> Void) {
         guard !ingredients.isEmpty else {
-            completion(.failure(.unknownError))
+            completion(.failure(.failedToGetRecipesIngredientIsEmpty))
             return
         }
         
-        print(recipesDataContainers.first?.recipe.image ?? "error")
         guard let recipeURL = getRecipeURL() else {
             completion(.failure(.couldNotCreateUrl))
             return
         }
-        networkManager.fetch(url: recipeURL, completion: completion)
-
+        
+        networkManager.fetch(url: recipeURL) { (result: Result<FridgeResponse, NetworkManagerError>) in
+            switch result {
+            case .failure:
+                completion(.failure(.failedToGetRecipesBackendError))
+                return
+            case .success(let fridgeResponse):
+                
+                let recipes = fridgeResponse.hits.compactMap({$0.recipe})
+                
+                completion(.success(recipes))
+                return
+            }
+            
+        }
     }
     
+    
+    private var urlComponents: UrlComponentsProtocol
+    
     func getRecipeURL() -> URL? {
-        var urlComponents = URLComponents()
+    
         let ingredientsQuery = ingredients.reduce("") { (currentResult, ingredientToAppend) -> String in
             currentResult + " " + ingredientToAppend
         }
@@ -72,14 +93,12 @@ class FridgeService {
         return urlComponents.url
     }
     
-    
-    
     func fetchRecipesPhotos(recipesDataContainers: [RecipeDataContainer], completion: @escaping () -> Void) {
         for recipesDataContainer in recipesDataContainers {
             guard
                 let recipeImageUrlString = recipesDataContainer.recipe.image,
                 let recipeImageUrl = URL(string: recipeImageUrlString)
-                else {
+            else {
                 continue
             }
             networkManager.fetchData(url: recipeImageUrl) { (result) in
@@ -93,7 +112,4 @@ class FridgeService {
             }
         }
     }
-    
-    
-    
 }

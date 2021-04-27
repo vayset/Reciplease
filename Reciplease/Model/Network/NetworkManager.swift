@@ -7,15 +7,53 @@ protocol NetworkManagerProtocol {
 }
 
 
+
+
 class AlamofireNetworkManager: NetworkManagerProtocol {
     
     
     func fetch<T>(url: URL, completion: @escaping (Result<T, NetworkManagerError>) -> Void) where T : Decodable, T : Encodable {
+
+        
+//        request.responseJSON { dataResponse in
+//            guard let data = dataResponse.data else {
+//                completion(.failure(.noData))
+//                return
+//            }
+//
+//            do {
+//                let decoddedData = try JSONDecoder().decode(T.self, from: data)
+//                completion(.success(decoddedData))
+//                return
+//            } catch {
+//                print(error)
+//                completion(.failure(.failedToDecodeJSON))
+//                return
+        //            }
+        //        }
+        
+        AF.request(url).responseDecodable { (dataResponse: DataResponse<T, AFError>) in
+            switch dataResponse.result {
+            case .failure:
+                completion(.failure(.failedToDecodeJSON))
+            case .success(let decoddedData):
+                completion(.success(decoddedData))
+            }
+        }
         
     }
     
     func fetchData(url: URL, completion: @escaping (Result<Data, NetworkManagerError>) -> Void) {
         
+        AF.request(url).responseJSON { dataResponse in
+            guard let data = dataResponse.data else {
+                completion(.failure(.noData))
+                return
+            }
+            
+            completion(.success(data))
+            return
+        }
     }
     
     

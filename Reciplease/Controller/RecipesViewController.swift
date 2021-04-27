@@ -38,9 +38,6 @@ class RecipesViewController: UIViewController {
         super.viewDidAppear(animated)
         
         if shouldDisplayFavorites {
-            if coreDataManager.readRecipes().isEmpty {
-                alertManagerController.presentSimpleAlert(from: self, message: "You have not ingredients in the favorite")
-            }
             recipesDataContainers = coreDataManager.readRecipes().reversed()
         }
         
@@ -49,9 +46,6 @@ class RecipesViewController: UIViewController {
                 self.recipesTableView.reloadData()
             }
         }
-        
-        
-        
         
     }
     

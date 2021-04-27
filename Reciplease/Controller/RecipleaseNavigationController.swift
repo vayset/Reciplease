@@ -14,8 +14,4 @@ class RecipleaseNavigationController: UINavigationController {
 
         navigationBar.tintColor = .white
     }
-    
-
- 
-
 }

@@ -39,6 +39,7 @@ class FridgeViewController: UIViewController {
             case .failedToAddIngredientIsTooBig:
                 alertManagerController.presentSimpleAlert(from: self, message: "Failed to add ingredient because is toobig")
                 return
+            default: return
             }
             
         case .success: ingredientsTextField.text?.removeAll()
@@ -87,7 +88,7 @@ class FridgeViewController: UIViewController {
     }
     
     
-    private func handleRecipesFetchResponse(fridgeResponse: Result<FridgeResponse, NetworkManagerError>) {
+    private func handleRecipesFetchResponse(fridgeResponse: Result<[Recipe], FridgeServiceError>) {
         
         DispatchQueue.main.async {
             
@@ -98,9 +99,8 @@ class FridgeViewController: UIViewController {
             switch fridgeResponse {
             case .failure( _):
                 self.alertManagerController.presentSimpleAlert(from: self, message: "Ingredient list is empty")
-            case .success(let response):
-                
-                let recipes = response.hits.map({$0.recipe})
+            case .success(let recipes):
+            
                 
                 guard !recipes.isEmpty else {
                     self.alertManagerController.presentSimpleAlert(from: self, message: "No recipe matched your ingredients")
