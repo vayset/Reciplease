@@ -8,7 +8,7 @@ protocol FridgeServiceDelegate: class {
 
 enum FridgeServiceError: Error {
     case failedToAddIngredientIsEmpty
-    case failedToAddIngredientIsTooBig
+    case failedToAddIngredientIsAlreadyAdded
     case failedToGetRecipesIngredientIsEmpty
     case failedToGetRecipesBackendError
     case couldNotCreateUrl
@@ -39,10 +39,22 @@ class FridgeService {
     
     
     func addIngredient(_ ingredient: String) -> Result<Void, FridgeServiceError> {
-        guard !ingredient.trimmingCharacters(in: .whitespaces).isEmpty else {
-            return .failure(.failedToAddIngredientIsEmpty)
+        
+        let ingredientsSplit = ingredient.split(separator: ",")
+        
+        for ingredient in ingredientsSplit {
+            let trimmedIngredient = ingredient.trimmingCharacters(in: .whitespaces).lowercased()
+            
+            guard !trimmedIngredient.isEmpty else {
+                return .failure(.failedToAddIngredientIsEmpty)
+            }
+            
+            guard !ingredients.contains(trimmedIngredient) else {
+                return .failure(.failedToAddIngredientIsAlreadyAdded)
+            }
+            
+            ingredients.append(trimmedIngredient)
         }
-        ingredients.append(ingredient)
         return .success(())
     }
     

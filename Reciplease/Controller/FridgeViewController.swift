@@ -36,8 +36,8 @@ class FridgeViewController: UIViewController {
             case .failedToAddIngredientIsEmpty:
                 alertManagerController.presentSimpleAlert(from: self, message: "Failed to add ingredient because is empty")
                 return
-            case .failedToAddIngredientIsTooBig:
-                alertManagerController.presentSimpleAlert(from: self, message: "Failed to add ingredient because is toobig")
+            case .failedToAddIngredientIsAlreadyAdded:
+                alertManagerController.presentSimpleAlert(from: self, message: "Failed to add ingredient because is already added")
                 return
             default: return
             }
@@ -138,7 +138,7 @@ extension FridgeViewController: UITableViewDataSource {
         }
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont(name: "Chalkduster", size: 24)
-        cell.textLabel?.text = "- \(fridgeService.ingredients[indexPath.row])"
+        cell.textLabel?.text = "- \(fridgeService.ingredients[indexPath.row].capitalized)"
         return cell
     }
     

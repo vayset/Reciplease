@@ -20,6 +20,117 @@ class FridgeServiceTests: XCTestCase {
         }
     }
     
+    func test_givenAlreadyAddedIngredient_whenAddSameIngredient_FailIngredientIsAlreadyAdded() throws {
+       let fridgeService = FridgeService()
+        
+        _ = fridgeService.addIngredient("lemon")
+        
+        
+        
+        let result = fridgeService.addIngredient("lemon")
+        
+        switch result {
+        case .failure(let error):
+            XCTAssertEqual(error, .failedToAddIngredientIsAlreadyAdded)
+        case .success:
+            XCTFail()
+    
+        }
+    }
+    
+    
+    func test_givenAlreadyAddedIngredient_whenAddSameIngredientWithEndWhiteSpace_FailIngredientIsAlreadyAdded() throws {
+       let fridgeService = FridgeService()
+        
+        _ = fridgeService.addIngredient("lemon ")
+        
+        
+        
+        let result = fridgeService.addIngredient("lemon")
+        
+        switch result {
+        case .failure(let error):
+            XCTAssertEqual(error, .failedToAddIngredientIsAlreadyAdded)
+        case .success:
+            XCTFail()
+    
+        }
+    }
+    
+    
+    func test_givenAlreadyAddedIngredient_whenAddSameIngredientWithStartWhiteSpace_FailIngredientIsAlreadyAdded() throws {
+       let fridgeService = FridgeService()
+        
+        _ = fridgeService.addIngredient(" lemon")
+        
+        
+        
+        let result = fridgeService.addIngredient("lemon")
+        
+        switch result {
+        case .failure(let error):
+            XCTAssertEqual(error, .failedToAddIngredientIsAlreadyAdded)
+        case .success:
+            XCTFail()
+    
+        }
+    }
+    
+    
+    
+    func test_givenAlreadyAddedIngredient_whenAddSameIngredientWithStartAndEndWhiteSpace_FailIngredientIsAlreadyAdded() throws {
+       let fridgeService = FridgeService()
+        
+        _ = fridgeService.addIngredient(" lemon      ")
+        
+        
+        
+        let result = fridgeService.addIngredient("lemon")
+        
+        switch result {
+        case .failure(let error):
+            XCTAssertEqual(error, .failedToAddIngredientIsAlreadyAdded)
+        case .success:
+            XCTFail()
+    
+        }
+    }
+    
+    
+    func test_givenAlreadyAddedIngredientNotCapitalized_whenAddSameIngredientCapitalized_FailIngredientIsAlreadyAdded() throws {
+       let fridgeService = FridgeService()
+        
+        _ = fridgeService.addIngredient("lemon")
+        
+        
+        let result = fridgeService.addIngredient("Lemon")
+        
+        switch result {
+        case .failure(let error):
+            XCTAssertEqual(error, .failedToAddIngredientIsAlreadyAdded)
+        case .success:
+            XCTFail()
+    
+        }
+    }
+    
+    func test_givenAlreadyAddedIngredientWithSpecialCasing_whenAddSameIngredientWithDifferentCasing_thenFailIngredientIsAlreadyAdded() throws {
+       let fridgeService = FridgeService()
+        
+        _ = fridgeService.addIngredient("lEmOn")
+        
+        
+        let result = fridgeService.addIngredient("Lemon")
+        
+        switch result {
+        case .failure(let error):
+            XCTAssertEqual(error, .failedToAddIngredientIsAlreadyAdded)
+        case .success:
+            XCTFail()
+    
+        }
+    }
+    
     func testAddIngredientSucces() throws {
        let fridgeService = FridgeService()
         
@@ -30,6 +141,19 @@ class FridgeServiceTests: XCTestCase {
             XCTFail()
         case .success:
             XCTAssertTrue(true)
+        }
+    }
+    
+    func test_givenEmptyIngredientList_whenMultipleIngredientSeparatedByCommaAtOnce_thenAllIngredientsAreAddded() throws {
+       let fridgeService = FridgeService()
+        
+        let result = fridgeService.addIngredient("lemon, orange, tomato")
+        
+        switch result {
+        case .failure( _):
+            XCTFail()
+        case .success:
+            XCTAssertEqual(fridgeService.ingredients, ["lemon", "orange", "tomato"])
         }
     }
     
