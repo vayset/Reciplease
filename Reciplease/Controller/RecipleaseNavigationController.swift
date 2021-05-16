@@ -7,11 +7,14 @@
 
 import UIKit
 
-class RecipleaseNavigationController: UINavigationController {
+final class RecipleaseNavigationController: UINavigationController {
 
+    // MARK: - Internal
+
+    // MARK: - Methods - Internal
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         navigationBar.tintColor = .white
     }
 }

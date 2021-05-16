@@ -1,6 +1,8 @@
 import UIKit
 
-class FridgeViewController: UIViewController {
+final class FridgeViewController: UIViewController {
+    
+    // MARK: - IBOutlets / IBActions
     
     @IBOutlet weak var ingredientsTextField: UITextField!
     @IBOutlet weak var ingredientsTableView: UITableView!
@@ -8,20 +10,6 @@ class FridgeViewController: UIViewController {
     @IBOutlet weak var clearIngredientsUIButton: UIButton!
     @IBOutlet weak var searchRecipesUIButton: UIButton!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
-    
-    private let fridgeService = FridgeService.shared
-    private let alertManagerController = AlertManagerController.shared
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        ingredientsTextField.delegate = self
-        fridgeService.delegate = self
-        ingredientsTableView.dataSource = self
-        ingredientsTableView.delegate = self
-        setupUI()
-        setupTextViewToolBar()
-        
-    }
     
     @IBAction func didTapOnAddIngredientsButton() {
         
@@ -57,7 +45,44 @@ class FridgeViewController: UIViewController {
         fridgeService.getRecipes(completion: handleRecipesFetchResponse(fridgeResponse:))
     }
     
-    func setupUI() {
+    // MARK: - Internal
+
+    // MARK: - Methods - Internal
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        ingredientsTextField.delegate = self
+        fridgeService.delegate = self
+        ingredientsTableView.dataSource = self
+        ingredientsTableView.delegate = self
+        setupUI()
+        setupTextViewToolBar()
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if
+            let destinationViewController = segue.destination as? RecipesViewController,
+            let recipes = sender as? [Recipe]
+        {
+            destinationViewController.recipesDataContainers = recipes.map { RecipeDataContainer(recipe: $0) }
+            destinationViewController.shouldDisplayFavorites = false
+        }
+        
+    }
+    
+    // MARK: - Private
+    
+    // MARK: - Properties - Private
+    
+    private let fridgeService = FridgeService.shared
+    private let alertManagerController = AlertManagerController.shared
+
+    // MARK: - Methods - Private
+    
+    private func setupUI() {
         addIngredientsUIButton.layer.cornerRadius = 5
         clearIngredientsUIButton.layer.cornerRadius = 5
         searchRecipesUIButton.layer.cornerRadius = 5
@@ -112,20 +137,9 @@ class FridgeViewController: UIViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        
-        if
-            let destinationViewController = segue.destination as? RecipesViewController,
-            let recipes = sender as? [Recipe]
-        {
-            destinationViewController.recipesDataContainers = recipes.map { RecipeDataContainer(recipe: $0) }
-            destinationViewController.shouldDisplayFavorites = false
-        }
-        
-    }
-    
 }
+
+// MARK: - Extension
 
 extension FridgeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -7,11 +7,18 @@
 import UIKit
 import Foundation
 
+final class RecipesViewController: UIViewController {
 
+    // MARK: - IBOutlets / IBActions
 
-class RecipesViewController: UIViewController {
+    @IBOutlet weak var noRecipeLabel: UILabel!
+    @IBOutlet weak var recipesTableView: UITableView!
     
-    var recipesDataContainers: [RecipeDataContainer] = [] {
+    // MARK: - Internal
+
+    // MARK: - Properties - Private
+
+     var recipesDataContainers: [RecipeDataContainer] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.recipesTableView.reloadData()
@@ -21,13 +28,9 @@ class RecipesViewController: UIViewController {
         }
     }
     var shouldDisplayFavorites = true
-    private let fridgeService = FridgeService.shared
-    private let coreDataManager = RecipeCoreDataManager.shared
-    private let alertManagerController = AlertManagerController.shared
     
-    @IBOutlet weak var noRecipeLabel: UILabel!
-    @IBOutlet weak var recipesTableView: UITableView!
-    
+    // MARK: - Methods - Private
+
     override func viewDidLoad() {
         super.viewDidLoad()
         recipesTableView.dataSource = self
@@ -60,7 +63,18 @@ class RecipesViewController: UIViewController {
         }
     }
     
+    // MARK: - Private
+    
+    // MARK: - Properties - Private
+    
+    private let fridgeService = FridgeService.shared
+    private let coreDataManager = RecipeCoreDataManager.shared
+    private let alertManagerController = AlertManagerController.shared
+    
 }
+
+// MARK: - Extension
+
 extension RecipesViewController: UITableViewDataSource  {
     
     

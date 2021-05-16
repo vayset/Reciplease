@@ -6,16 +6,20 @@ protocol FridgeServiceDelegate: class {
     
 }
 
-enum FridgeServiceError: Error {
-    case failedToAddIngredientIsEmpty
-    case failedToAddIngredientIsAlreadyAdded
-    case failedToGetRecipesIngredientIsEmpty
-    case failedToGetRecipesBackendError
-    case couldNotCreateUrl
-}
-
-class FridgeService {
+final class FridgeService {
+    // MARK: - Internal
+    
+    // MARK: - Properties - Internal
+    
     static let shared = FridgeService()
+    weak var delegate: FridgeServiceDelegate?
+    var ingredients: [String] = [] {
+        didSet {
+            delegate?.didUpdateIngredients()
+        }
+    }
+    
+    // MARK: - Methods - Internal
     
     init(
         networkManager: NetworkManagerProtocol = AlamofireNetworkManager(),
@@ -24,20 +28,7 @@ class FridgeService {
         self.networkManager = networkManager
         self.urlComponents = urlComponents
     }
-    
-    var recipesDataContainers: [RecipeDataContainer] = []
-    
-    weak var delegate: FridgeServiceDelegate?
-    
-    private let networkManager: NetworkManagerProtocol
-    
-    var ingredients: [String] = [] {
-        didSet {
-            delegate?.didUpdateIngredients()
-        }
-    }
-    
-    
+
     func addIngredient(_ ingredient: String) -> Result<Void, FridgeServiceError> {
         
         let ingredientsSplit = ingredient.split(separator: ",")
@@ -85,11 +76,7 @@ class FridgeService {
         }
     }
     
-    
-    private var urlComponents: UrlComponentsProtocol
-    
     func getRecipeURL() -> URL? {
-    
         let ingredientsQuery = ingredients.reduce("") { (currentResult, ingredientToAppend) -> String in
             currentResult + " " + ingredientToAppend
         }
@@ -124,4 +111,13 @@ class FridgeService {
             }
         }
     }
+    
+    // MARK: - Private
+    
+    // MARK: - Properties - Private
+    
+    private var recipesDataContainers: [RecipeDataContainer] = []
+    private let networkManager: NetworkManagerProtocol
+    private var urlComponents: UrlComponentsProtocol
+    
 }

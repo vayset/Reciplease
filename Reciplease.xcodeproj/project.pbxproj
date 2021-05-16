@@ -28,6 +28,7 @@
 		3F4811A226416E9D006AC29C /* AlamofireSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4811A126416E9D006AC29C /* AlamofireSessionMock.swift */; };
 		3F9A28E925EC800F0079D5F7 /* RecipesDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9A28E825EC800F0079D5F7 /* RecipesDetailsViewController.swift */; };
 		3F9A299925FFCE470079D5F7 /* RecipeDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9A299825FFCE470079D5F7 /* RecipeDataContainer.swift */; };
+		3FAA37022650BE46003C32EB /* FridgeServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAA37012650BE46003C32EB /* FridgeServiceError.swift */; };
 		3FC0008A26135CE200B92859 /* RecipeCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC0008926135CE200B92859 /* RecipeCoreDataManager.swift */; };
 		3FC0008F26135D6100B92859 /* RecipeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC0008E26135D6100B92859 /* RecipeEntity.swift */; };
 		3FC84EBD25BE4F34007A0889 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC84EBC25BE4F34007A0889 /* AppDelegate.swift */; };
@@ -87,6 +88,7 @@
 		3F4811A126416E9D006AC29C /* AlamofireSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireSessionMock.swift; sourceTree = "<group>"; };
 		3F9A28E825EC800F0079D5F7 /* RecipesDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesDetailsViewController.swift; sourceTree = "<group>"; };
 		3F9A299825FFCE470079D5F7 /* RecipeDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDataContainer.swift; sourceTree = "<group>"; };
+		3FAA37012650BE46003C32EB /* FridgeServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeServiceError.swift; sourceTree = "<group>"; };
 		3FC0008926135CE200B92859 /* RecipeCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCoreDataManager.swift; sourceTree = "<group>"; };
 		3FC0008E26135D6100B92859 /* RecipeEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeEntity.swift; sourceTree = "<group>"; };
 		3FC84EB925BE4F34007A0889 /* Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,8 +173,8 @@
 			isa = PBXGroup;
 			children = (
 				3FC84EC525BE4F34007A0889 /* Reciplease.xcdatamodeld */,
-				3F332D4625C4D7D500FA47CF /* FridgeService.swift */,
-				3F332D5625C50C3B00FA47CF /* FridgeResponse.swift */,
+				3FAA36FF2650BD74003C32EB /* Services */,
+				3FAA37002650BDAF003C32EB /* Responses */,
 				3F332D5525C50C0F00FA47CF /* Network */,
 				3F9A299825FFCE470079D5F7 /* RecipeDataContainer.swift */,
 				3FC9A95A260A2BF9003B3F82 /* TimeConverter.swift */,
@@ -224,6 +226,23 @@
 				3F48119F26416E68006AC29C /* AlamofireSession.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		3FAA36FF2650BD74003C32EB /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				3F332D4625C4D7D500FA47CF /* FridgeService.swift */,
+				3FAA37012650BE46003C32EB /* FridgeServiceError.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		3FAA37002650BDAF003C32EB /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				3F332D5625C50C3B00FA47CF /* FridgeResponse.swift */,
+			);
+			name = Responses;
 			sourceTree = "<group>";
 		};
 		3FC84EB025BE4F34007A0889 = {
@@ -533,6 +552,7 @@
 				3F332D4C25C5087F00FA47CF /* NetworkManager.swift in Sources */,
 				3FC0008A26135CE200B92859 /* RecipeCoreDataManager.swift in Sources */,
 				3F323C0525D08F3900F27AAD /* RecipeTableViewCell.swift in Sources */,
+				3FAA37022650BE46003C32EB /* FridgeServiceError.swift in Sources */,
 				3F323C0025CFC0B000F27AAD /* RecipesViewController.swift in Sources */,
 				3FC9A95B260A2BF9003B3F82 /* TimeConverter.swift in Sources */,
 				3F0D20C926261C7800E132BB /* RecipleaseNavigationController.swift in Sources */,

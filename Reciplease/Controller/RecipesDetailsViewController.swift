@@ -7,9 +7,10 @@
 
 import UIKit
 
-class RecipesDetailsViewController: UIViewController {
-
-    var recipeDataContainer: RecipeDataContainer?
+final class RecipesDetailsViewController: UIViewController {
+    
+    // MARK: - IBOutlets / IBActions
+    
     @IBOutlet weak var recipeTitleLabel: UILabel!
     @IBOutlet weak var recipeImageView: UIImageView!
     @IBOutlet weak var ingredientsTableView: UITableView!
@@ -18,8 +19,32 @@ class RecipesDetailsViewController: UIViewController {
     @IBOutlet weak var cookingTimeLabel: UILabel!
     @IBOutlet weak var cookingTimeView: UIView!
     
-    let timeConverter = TimeConverter()
-
+    @IBAction func getDirectionsUIButton(_ sender: Any) {
+        if
+            let urlString = recipeDataContainer?.recipe.url,
+            let url = URL(string: urlString) {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    @IBAction func didTapFavoriteButton(_ sender: Any) {
+        guard let recipeToFavoriteContainer = recipeDataContainer else { return }
+        
+        if !getIsRecipeFavorited(recipe: recipeToFavoriteContainer.recipe) {
+            coreDataManager.createRecipe(recipeDataContainer: recipeToFavoriteContainer)
+        } else {
+            coreDataManager.deleteRecipe(with: recipeToFavoriteContainer.recipe.label!)
+        }
+        updateFavoriteBarButtonIcon()
+    }
+    
+    // MARK: - Internal
+    
+    // MARK: - Properties - Internal
+    
+    var recipeDataContainer: RecipeDataContainer?
+    
+    // MARK: - Methods - Internal
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,19 +60,22 @@ class RecipesDetailsViewController: UIViewController {
         updateFavoriteBarButtonIcon()
     }
     
-    @IBAction func getDirectionsUIButton(_ sender: Any) {
-        
-        if
-            let urlString = recipeDataContainer?.recipe.url,
-            let url = URL(string: urlString) {
-                
-            UIApplication.shared.open(url)
-        }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        gradient?.frame = recipeImageView.bounds
     }
     
-    var gradient: CAGradientLayer?
+    // MARK: - Private
     
-    func createGradientsEffect() {
+    // MARK: - Properties - Private
+    
+    private let timeConverter = TimeConverter()
+    private var gradient: CAGradientLayer?
+    private let coreDataManager = RecipeCoreDataManager.shared
+    
+    // MARK: - Methods - Private
+    
+    private func createGradientsEffect() {
         let colorBrown = UIColor(red: 57/255, green: 51/255, blue: 50/255, alpha: 1.0)
         gradient = CAGradientLayer()
         gradient?.frame = recipeImageView.bounds
@@ -57,17 +85,6 @@ class RecipesDetailsViewController: UIViewController {
         if let gradient = gradient {
             recipeImageView.layer.addSublayer(gradient)
         }
-    }
-    
-    @IBAction func didTapFavoriteButton(_ sender: Any) {
-        guard let recipeToFavoriteContainer = recipeDataContainer else { return }
-        
-        if !getIsRecipeFavorited(recipe: recipeToFavoriteContainer.recipe) {
-            coreDataManager.createRecipe(recipeDataContainer: recipeToFavoriteContainer)
-        } else {
-            coreDataManager.deleteRecipe(with: recipeToFavoriteContainer.recipe.label!)
-        }
-        updateFavoriteBarButtonIcon()
     }
     
     private func updateFavoriteBarButtonIcon() {
@@ -80,7 +97,6 @@ class RecipesDetailsViewController: UIViewController {
         }
         
     }
-    
     
     private func getIsRecipeFavorited(recipe: Recipe) -> Bool {
         
@@ -107,7 +123,7 @@ class RecipesDetailsViewController: UIViewController {
         cookingTimeView.layer.cornerRadius = 5
     }
     
-    func configure() {
+    private func configure() {
         let recipe = recipeDataContainer?.recipe
         
         if let totalTime = recipe?.totalTime {
@@ -116,18 +132,9 @@ class RecipesDetailsViewController: UIViewController {
         }
     }
     
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        gradient?.frame = recipeImageView.bounds
-        
-    }
-    
-    
-    private let coreDataManager = RecipeCoreDataManager.shared
-
 }
+
+// MARK: - Extension
 
 extension RecipesDetailsViewController: UITableViewDataSource {
     
@@ -142,14 +149,13 @@ extension RecipesDetailsViewController: UITableViewDataSource {
         }
         let cellText = "- \(recipeDataContainer?.recipe.ingredientLines![indexPath.row] ?? "Error")"
         
-
+        
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont(name: "Chalkduster", size: 15.0)
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.text = cellText
         return cell
     }
-
     
 }
 

@@ -7,15 +7,23 @@
 
 import UIKit
 
-class TabBarViewController: UITabBarController {
+final class TabBarViewController: UITabBarController {
 
+    // MARK: - Internal
+
+    // MARK: - Methods - Internal
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         customTabBar()
         addBordureInTabBar()
     }
     
-    func addBordureInTabBar() {
+    // MARK: - Private
+    
+    // MARK: - Methods - Private
+    
+   private func addBordureInTabBar() {
         let midX = self.view.bounds.midX
         
         let topline = CALayer()
@@ -29,7 +37,7 @@ class TabBarViewController: UITabBarController {
         self.tabBar.layer.addSublayer(verticalLine)
     }
 
-    func customTabBar() {
+    private func customTabBar() {
         let uiTabBarItem = UITabBarItem.appearance()
         
         let fontAttributes = [NSAttributedString.Key.font: UIFont(name: "Chalkduster", size: 22)]
