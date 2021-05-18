@@ -8,8 +8,6 @@
 import Foundation
 import Alamofire
 
-
-
 protocol AlamofireSessionProtocol {
     func getEncodableResponse<T: Codable>(url: URL, completion: @escaping (DataResponse<T, AFError>) -> Void)
     func getJsonDataResponse(url: URL, completion: @escaping (AFDataResponse<Any>) -> Void)
@@ -24,5 +22,4 @@ class AlamofireSession: AlamofireSessionProtocol {
         AF.request(url).responseDecodable(completionHandler: completion)
     }
     
-   
 }

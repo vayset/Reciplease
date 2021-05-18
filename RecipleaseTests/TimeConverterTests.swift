@@ -79,8 +79,7 @@ class TimeConverterTests: XCTestCase {
         XCTAssertEqual(result, "--")
         
     }
-    
-    
+        
     func testGiven1MinutesWhenConvertToStringThenGetCorrectResult() throws {
         
         let formatterMock = DateComponentsFormatterMock()

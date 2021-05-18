@@ -1,14 +1,15 @@
 import CoreData
 
-
 class RecipeCoreDataManager {
     
+    // MARK: - Internal
+
+    // MARK: - Properties - Private
+    
     static let shared = RecipeCoreDataManager()
-    
-    
-    
-    // MARK: - INTERNAL
-    
+        
+    // MARK: - Methods - Internal
+
     func createRecipe(recipeDataContainer: RecipeDataContainer) {
         let recipeEntity = RecipeEntity(context: viewContext)
         recipeEntity.label = recipeDataContainer.recipe.label
@@ -18,7 +19,6 @@ class RecipeCoreDataManager {
         if let totalTime = recipeDataContainer.recipe.totalTime {
             recipeEntity.totalTime = Int32(totalTime)
         }
-    
         do {
             try viewContext.save()
         } catch {
@@ -32,9 +32,7 @@ class RecipeCoreDataManager {
         for recipeEntity in recipeEntities where recipeEntity.label == title {
             viewContext.delete(recipeEntity)
         }
-        
         saveContext()
-        
     }
     
     func readRecipes() -> [RecipeDataContainer] {
@@ -60,16 +58,13 @@ class RecipeCoreDataManager {
         }
     }
     
-    func updateText() {
-        print("Is not implemented")
-    }
+    // MARK: - Private
     
-
+    // MARK: - Properties - Private
     
     // MARK: - Core Data stack
 
     private lazy var persistentContainer: NSPersistentContainer = {
-     
         let container = NSPersistentContainer(name: "Reciplease")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -83,10 +78,9 @@ class RecipeCoreDataManager {
         return persistentContainer.viewContext
     }
     
-    
-    // MARK: - Other
-    
-    private func saveContext () {
+    // MARK: - Methods - Private
+
+    private func saveContext() {
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {
@@ -98,21 +92,11 @@ class RecipeCoreDataManager {
         }
     }
     
-    
-    
-    
-    
     private func getStoredRecipeEntities() -> [RecipeEntity] {
         let request: NSFetchRequest<RecipeEntity> = RecipeEntity.fetchRequest()
         guard let recipeEntities = try? viewContext.fetch(request) else {
             return []
         }
-        
-        
         return recipeEntities
     }
-    
-    
-
-  
 }

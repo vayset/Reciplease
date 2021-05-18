@@ -11,15 +11,15 @@ final class RecipesDetailsViewController: UIViewController {
     
     // MARK: - IBOutlets / IBActions
     
-    @IBOutlet weak var recipeTitleLabel: UILabel!
-    @IBOutlet weak var recipeImageView: UIImageView!
-    @IBOutlet weak var ingredientsTableView: UITableView!
-    @IBOutlet weak var getDirectionsOutlet: UIButton!
-    @IBOutlet weak var favoriteBarButtonItem: UIBarButtonItem!
-    @IBOutlet weak var cookingTimeLabel: UILabel!
-    @IBOutlet weak var cookingTimeView: UIView!
+    @IBOutlet weak private var recipeTitleLabel: UILabel!
+    @IBOutlet weak private var recipeImageView: UIImageView!
+    @IBOutlet weak private var ingredientsTableView: UITableView!
+    @IBOutlet weak private var getDirectionsOutlet: UIButton!
+    @IBOutlet weak private var favoriteBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak private var cookingTimeLabel: UILabel!
+    @IBOutlet weak private var cookingTimeView: UIView!
     
-    @IBAction func getDirectionsUIButton(_ sender: Any) {
+    @IBAction private func getDirectionsUIButton(_ sender: Any) {
         if
             let urlString = recipeDataContainer?.recipe.url,
             let url = URL(string: urlString) {
@@ -27,7 +27,7 @@ final class RecipesDetailsViewController: UIViewController {
         }
     }
     
-    @IBAction func didTapFavoriteButton(_ sender: Any) {
+    @IBAction private func didTapFavoriteButton(_ sender: Any) {
         guard let recipeToFavoriteContainer = recipeDataContainer else { return }
         
         if !getIsRecipeFavorited(recipe: recipeToFavoriteContainer.recipe) {
@@ -95,7 +95,6 @@ final class RecipesDetailsViewController: UIViewController {
         } else {
             favoriteBarButtonItem.image = UIImage(systemName: "star")
         }
-        
     }
     
     private func getIsRecipeFavorited(recipe: Recipe) -> Bool {
@@ -148,7 +147,6 @@ extension RecipesDetailsViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         let cellText = "- \(recipeDataContainer?.recipe.ingredientLines![indexPath.row] ?? "Error")"
-        
         
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont(name: "Chalkduster", size: 15.0)

@@ -11,9 +11,8 @@ final class RecipesViewController: UIViewController {
 
     // MARK: - IBOutlets / IBActions
 
-    @IBOutlet weak var noRecipeLabel: UILabel!
-    @IBOutlet weak var recipesTableView: UITableView!
-    
+    @IBOutlet weak private var noRecipeLabel: UILabel!
+    @IBOutlet weak private var recipesTableView: UITableView!
     // MARK: - Internal
 
     // MARK: - Properties - Private
@@ -24,11 +23,9 @@ final class RecipesViewController: UIViewController {
                 self.recipesTableView.reloadData()
                 self.noRecipeLabel.isHidden = !self.recipesDataContainers.isEmpty
             }
-            
         }
     }
     var shouldDisplayFavorites = true
-    
     // MARK: - Methods - Private
 
     override func viewDidLoad() {
@@ -54,7 +51,6 @@ final class RecipesViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        
         if
             let destinationViewController = segue.destination as? RecipesDetailsViewController,
             let recipeDataContainer = sender as? RecipeDataContainer
@@ -70,14 +66,12 @@ final class RecipesViewController: UIViewController {
     private let fridgeService = FridgeService.shared
     private let coreDataManager = RecipeCoreDataManager.shared
     private let alertManagerController = AlertManagerController.shared
-    
 }
 
 // MARK: - Extension
 
-extension RecipesViewController: UITableViewDataSource  {
-    
-    
+extension RecipesViewController: UITableViewDataSource {
+        
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recipesDataContainers.count
         

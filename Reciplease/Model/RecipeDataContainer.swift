@@ -9,4 +9,3 @@ class RecipeDataContainer {
     let recipe: Recipe
     var photo: Data?
 }
-

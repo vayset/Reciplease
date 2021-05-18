@@ -1,8 +1,5 @@
-
-
 import CoreData
 
-class RecipeEntity: NSManagedObject{
+class RecipeEntity: NSManagedObject {
         
 }
-

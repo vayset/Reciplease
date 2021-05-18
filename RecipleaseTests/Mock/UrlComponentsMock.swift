@@ -1,7 +1,6 @@
 import Foundation
 @testable import Reciplease
 
-
 struct UrlComponentsMock: UrlComponentsProtocol {
     var scheme: String? = ""
     
@@ -13,6 +12,4 @@ struct UrlComponentsMock: UrlComponentsProtocol {
     
     var url: URL? = nil
     
-    
 }
-

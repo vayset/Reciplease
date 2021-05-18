@@ -21,7 +21,7 @@
 		3F323C0025CFC0B000F27AAD /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F323BFF25CFC0B000F27AAD /* RecipesViewController.swift */; };
 		3F323C0525D08F3900F27AAD /* RecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F323C0425D08F3900F27AAD /* RecipeTableViewCell.swift */; };
 		3F332D4725C4D7D500FA47CF /* FridgeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F332D4625C4D7D500FA47CF /* FridgeService.swift */; };
-		3F332D4C25C5087F00FA47CF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F332D4B25C5087F00FA47CF /* NetworkManager.swift */; };
+		3F332D4C25C5087F00FA47CF /* AlamofireNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F332D4B25C5087F00FA47CF /* AlamofireNetworkManager.swift */; };
 		3F332D5125C508A500FA47CF /* NetworkManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F332D5025C508A500FA47CF /* NetworkManagerError.swift */; };
 		3F332D5725C50C3B00FA47CF /* FridgeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F332D5625C50C3B00FA47CF /* FridgeResponse.swift */; };
 		3F4811A026416E68006AC29C /* AlamofireSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F48119F26416E68006AC29C /* AlamofireSession.swift */; };
@@ -81,7 +81,7 @@
 		3F323BFF25CFC0B000F27AAD /* RecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesViewController.swift; sourceTree = "<group>"; };
 		3F323C0425D08F3900F27AAD /* RecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableViewCell.swift; sourceTree = "<group>"; };
 		3F332D4625C4D7D500FA47CF /* FridgeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeService.swift; sourceTree = "<group>"; };
-		3F332D4B25C5087F00FA47CF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		3F332D4B25C5087F00FA47CF /* AlamofireNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireNetworkManager.swift; sourceTree = "<group>"; };
 		3F332D5025C508A500FA47CF /* NetworkManagerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerError.swift; sourceTree = "<group>"; };
 		3F332D5625C50C3B00FA47CF /* FridgeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeResponse.swift; sourceTree = "<group>"; };
 		3F48119F26416E68006AC29C /* AlamofireSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireSession.swift; sourceTree = "<group>"; };
@@ -221,7 +221,7 @@
 		3F332D5525C50C0F00FA47CF /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				3F332D4B25C5087F00FA47CF /* NetworkManager.swift */,
+				3F332D4B25C5087F00FA47CF /* AlamofireNetworkManager.swift */,
 				3F332D5025C508A500FA47CF /* NetworkManagerError.swift */,
 				3F48119F26416E68006AC29C /* AlamofireSession.swift */,
 			);
@@ -322,6 +322,7 @@
 				3FC84EB625BE4F34007A0889 /* Frameworks */,
 				3FC84EB725BE4F34007A0889 /* Resources */,
 				F6ED27C0A2553437313926F5 /* [CP] Embed Pods Frameworks */,
+				3FAA37032650C821003C32EB /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -458,6 +459,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Reciplease-RecipleaseUITests/Pods-Reciplease-RecipleaseUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		3FAA37032650C821003C32EB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 		5A0E2E49F8DABC42C05EB639 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -549,7 +567,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F9A28E925EC800F0079D5F7 /* RecipesDetailsViewController.swift in Sources */,
-				3F332D4C25C5087F00FA47CF /* NetworkManager.swift in Sources */,
+				3F332D4C25C5087F00FA47CF /* AlamofireNetworkManager.swift in Sources */,
 				3FC0008A26135CE200B92859 /* RecipeCoreDataManager.swift in Sources */,
 				3F323C0525D08F3900F27AAD /* RecipeTableViewCell.swift in Sources */,
 				3FAA37022650BE46003C32EB /* FridgeServiceError.swift in Sources */,

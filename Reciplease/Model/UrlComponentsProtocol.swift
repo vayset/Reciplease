@@ -4,9 +4,6 @@
 //
 //  Created by Saddam Satouyev on 27/04/2021.
 //
-
-
-
 import Foundation
 
 protocol UrlComponentsProtocol {
@@ -18,5 +15,3 @@ protocol UrlComponentsProtocol {
 }
 
 extension URLComponents: UrlComponentsProtocol { }
-
-

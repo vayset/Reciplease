@@ -1,21 +1,17 @@
 import Foundation
 import Alamofire
 
-
-protocol NetworkManagerProtocol {
+protocol AlamofireNetworkManagerProtocol {
     func fetch<T : Codable>(url: URL, completion: @escaping (Result<T, NetworkManagerError>) -> Void)
     func fetchData(url: URL, completion: @escaping (Result<Data, NetworkManagerError>) -> Void)
 }
 
-
-class AlamofireNetworkManager: NetworkManagerProtocol {
+class AlamofireNetworkManager: AlamofireNetworkManagerProtocol {
     init(session: AlamofireSessionProtocol = AlamofireSession()) {
         self.session = session
     }
     
-    let session: AlamofireSessionProtocol
-    
-    
+    private let session: AlamofireSessionProtocol
     
     func fetch<T>(url: URL, completion: @escaping (Result<T, NetworkManagerError>) -> Void) where T : Decodable, T : Encodable {
 
@@ -27,7 +23,6 @@ class AlamofireNetworkManager: NetworkManagerProtocol {
                 completion(.success(decoddedData))
             }
         }
-        
     }
     
     func fetchData(url: URL, completion: @escaping (Result<Data, NetworkManagerError>) -> Void) {
@@ -42,6 +37,4 @@ class AlamofireNetworkManager: NetworkManagerProtocol {
             return
         }
     }
-    
-    
 }

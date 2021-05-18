@@ -26,7 +26,6 @@ class TimeConverter {
     }
 }
 
-
 protocol DateComponentsFormatterProtocol {
     var unitsStyle: DateComponentsFormatter.UnitsStyle { get set }
     func string(for obj: Any?) -> String?
@@ -35,4 +34,3 @@ protocol DateComponentsFormatterProtocol {
 extension DateComponentsFormatter: DateComponentsFormatterProtocol {
 
 }
-

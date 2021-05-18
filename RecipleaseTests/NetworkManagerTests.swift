@@ -8,10 +8,8 @@
 import XCTest
 @testable import Reciplease
 
-
 class NetworkManagerTests: XCTestCase {
     
-
     func test_given_whenFetch_thenSuccess() {
         
         let alamafireSessionMock = AlamofireSessionSuccessMock()
@@ -22,14 +20,13 @@ class NetworkManagerTests: XCTestCase {
         networkManager.fetch(url: fakeUrl) { (result: Result<FridgeResponse, NetworkManagerError>) in
             switch result {
             case .failure:
-                XCTFail()
+                XCTFail("ERROR")
             case .success(let response):
                 XCTAssertEqual(response.hits.first!.recipe!.label, "pizza")
             }
         }
         
     }
-    
     
     func test_given_whenFetch_thenFailure() {
         
@@ -42,18 +39,11 @@ class NetworkManagerTests: XCTestCase {
             switch result {
             case .failure(let error):
                 XCTAssertEqual(error, .failedToDecodeJSON)
-                
             case .success:
-                XCTFail()
+                XCTFail("ERROR")
             }
         }
-        
     }
-    
-    
-    
-    
-    
     
     func test_given_whenFetchData_thenSuccess() {
         
@@ -64,16 +54,14 @@ class NetworkManagerTests: XCTestCase {
         
         networkManager.fetchData(url: fakeUrl) { result in
             switch result {
-            case .failure:
-                XCTFail()
+            case .failure: XCTFail("ERROR")
             case .success:
                 XCTAssert(true)
             }
         }
         
     }
-    
-    
+        
     func test_given_whenFetchData_thenFailure() {
         
         let alamafireSessionMock = AlamofireSessionFailureMock()
@@ -87,12 +75,9 @@ class NetworkManagerTests: XCTestCase {
                 XCTAssertEqual(error, .noData)
                 
             case .success:
-                XCTFail()
+                XCTFail("ERROR")
             }
         }
         
     }
-
-    
-    
 }

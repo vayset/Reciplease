@@ -1,9 +1,7 @@
-
 import Foundation
 
 protocol FridgeServiceDelegate: class {
-    func didUpdateIngredients()
-    
+    func didUpdateIngredients()    
 }
 
 final class FridgeService {
@@ -18,11 +16,11 @@ final class FridgeService {
             delegate?.didUpdateIngredients()
         }
     }
-    
+
     // MARK: - Methods - Internal
     
     init(
-        networkManager: NetworkManagerProtocol = AlamofireNetworkManager(),
+        networkManager: AlamofireNetworkManagerProtocol = AlamofireNetworkManager(),
         urlComponents: UrlComponentsProtocol = URLComponents()
     ) {
         self.networkManager = networkManager
@@ -87,7 +85,7 @@ final class FridgeService {
         urlComponents.queryItems = [
             URLQueryItem(name: "q", value: ingredientsQuery),
             URLQueryItem(name: "app_id", value: "0d4f5146"),
-            URLQueryItem(name: "app_key", value: "bde031a40579acca357801fcc87f4183"),
+            URLQueryItem(name: "app_key", value: "bde031a40579acca357801fcc87f4183")
         ]
         return urlComponents.url
     }
@@ -117,7 +115,7 @@ final class FridgeService {
     // MARK: - Properties - Private
     
     private var recipesDataContainers: [RecipeDataContainer] = []
-    private let networkManager: NetworkManagerProtocol
+    private let networkManager: AlamofireNetworkManagerProtocol
     private var urlComponents: UrlComponentsProtocol
     
 }

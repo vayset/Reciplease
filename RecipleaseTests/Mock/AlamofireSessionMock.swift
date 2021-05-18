@@ -9,7 +9,6 @@ import Foundation
 import Alamofire
 @testable import Reciplease
 
-
 class AlamofireSessionSuccessMock: AlamofireSessionProtocol {
     func getJsonDataResponse(url: URL, completion: @escaping (AFDataResponse<Any>) -> Void) {
         let dataResponse = AFDataResponse(
@@ -64,8 +63,6 @@ class AlamofireSessionSuccessMock: AlamofireSessionProtocol {
     }
 }
 
-
-
 class AlamofireSessionFailureMock: AlamofireSessionProtocol {
     func getJsonDataResponse(url: URL, completion: @escaping (AFDataResponse<Any>) -> Void) {
         let dataResponse = AFDataResponse(
@@ -92,6 +89,3 @@ class AlamofireSessionFailureMock: AlamofireSessionProtocol {
         completion(dataResponse)
     }
 }
-
-
-
