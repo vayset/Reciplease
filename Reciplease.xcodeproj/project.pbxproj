@@ -26,6 +26,8 @@
 		3F332D5725C50C3B00FA47CF /* FridgeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F332D5625C50C3B00FA47CF /* FridgeResponse.swift */; };
 		3F4811A026416E68006AC29C /* AlamofireSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F48119F26416E68006AC29C /* AlamofireSession.swift */; };
 		3F4811A226416E9D006AC29C /* AlamofireSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4811A126416E9D006AC29C /* AlamofireSessionMock.swift */; };
+		3F4A32182657327100C71EED /* CoreDataStackMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4A32172657327100C71EED /* CoreDataStackMock.swift */; };
+		3F4A321A2657365C00C71EED /* RecipeCoreDataManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4A32192657365C00C71EED /* RecipeCoreDataManagerTest.swift */; };
 		3F9A28E925EC800F0079D5F7 /* RecipesDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9A28E825EC800F0079D5F7 /* RecipesDetailsViewController.swift */; };
 		3F9A299925FFCE470079D5F7 /* RecipeDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9A299825FFCE470079D5F7 /* RecipeDataContainer.swift */; };
 		3FAA37022650BE46003C32EB /* FridgeServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAA37012650BE46003C32EB /* FridgeServiceError.swift */; };
@@ -86,6 +88,8 @@
 		3F332D5625C50C3B00FA47CF /* FridgeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeResponse.swift; sourceTree = "<group>"; };
 		3F48119F26416E68006AC29C /* AlamofireSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireSession.swift; sourceTree = "<group>"; };
 		3F4811A126416E9D006AC29C /* AlamofireSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireSessionMock.swift; sourceTree = "<group>"; };
+		3F4A32172657327100C71EED /* CoreDataStackMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackMock.swift; sourceTree = "<group>"; };
+		3F4A32192657365C00C71EED /* RecipeCoreDataManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCoreDataManagerTest.swift; sourceTree = "<group>"; };
 		3F9A28E825EC800F0079D5F7 /* RecipesDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesDetailsViewController.swift; sourceTree = "<group>"; };
 		3F9A299825FFCE470079D5F7 /* RecipeDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDataContainer.swift; sourceTree = "<group>"; };
 		3FAA37012650BE46003C32EB /* FridgeServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeServiceError.swift; sourceTree = "<group>"; };
@@ -165,6 +169,7 @@
 				3F12A3C6263FC02C00334D6D /* CodableMock.swift */,
 				3F12A3B72638A23D00334D6D /* DateComponentsFormatterMock.swift */,
 				3F4811A126416E9D006AC29C /* AlamofireSessionMock.swift */,
+				3F4A32172657327100C71EED /* CoreDataStackMock.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -285,6 +290,7 @@
 				3F0CEAF1262233F400642F6D /* Mock */,
 				3FC84ED625BE4F36007A0889 /* TimeConverterTests.swift */,
 				3F12A3C1263FBDC400334D6D /* NetworkManagerTests.swift */,
+				3F4A32192657365C00C71EED /* RecipeCoreDataManagerTest.swift */,
 				3F0D20E0262F6D7400E132BB /* FridgeServiceTests.swift */,
 				3FC84ED825BE4F36007A0889 /* Info.plist */,
 			);
@@ -599,10 +605,12 @@
 				3F4811A226416E9D006AC29C /* AlamofireSessionMock.swift in Sources */,
 				3F0CEAFE262235F700642F6D /* UrlComponentsMock.swift in Sources */,
 				3F12A3B82638A23D00334D6D /* DateComponentsFormatterMock.swift in Sources */,
+				3F4A32182657327100C71EED /* CoreDataStackMock.swift in Sources */,
 				3F0D20E1262F6D7400E132BB /* FridgeServiceTests.swift in Sources */,
 				3F12A3C2263FBDC400334D6D /* NetworkManagerTests.swift in Sources */,
 				3FC84ED725BE4F36007A0889 /* TimeConverterTests.swift in Sources */,
 				3F0CEAF32622341D00642F6D /* NetworkManagerMock.swift in Sources */,
+				3F4A321A2657365C00C71EED /* RecipeCoreDataManagerTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

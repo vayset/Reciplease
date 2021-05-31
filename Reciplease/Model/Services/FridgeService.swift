@@ -27,9 +27,16 @@ final class FridgeService {
         self.urlComponents = urlComponents
     }
 
-    func addIngredient(_ ingredient: String) -> Result<Void, FridgeServiceError> {
+    /// "Tomato, Cheese, Lemon"
+    ///=> ["Tomato", "Cheese", "Lemon"]
+    /// 1. tomato
+    /// 2. retire les blanc et met le tout en miniscule
+    /// 3. Check que pas vide
+    /// 4. Check que le tableau d'ingrédient ne continet PAS deja l'ingrédient à ajouter
+    /// 5. Ajoute
+    func addIngredient(_ ingredientsAsSingleString: String) -> Result<Void, FridgeServiceError> {
         
-        let ingredientsSplit = ingredient.split(separator: ",")
+        let ingredientsSplit = ingredientsAsSingleString.split(separator: ",")
         
         for ingredient in ingredientsSplit {
             let trimmedIngredient = ingredient.trimmingCharacters(in: .whitespaces).lowercased()

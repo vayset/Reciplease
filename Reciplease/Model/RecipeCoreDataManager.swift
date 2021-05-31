@@ -21,15 +21,22 @@ class RecipeCoreDataManager {
         }
         do {
             try viewContext.save()
-        } catch {
-            print("error")
-        }
+        } catch { print("error") }
     }
     
     func deleteRecipe(with title: String) {
         let recipeEntities = getStoredRecipeEntities()
         
         for recipeEntity in recipeEntities where recipeEntity.label == title {
+            viewContext.delete(recipeEntity)
+        }
+        saveContext()
+    }
+    
+    func deleteAllRecipes() {
+        let recipeEntities = getStoredRecipeEntities()
+        
+        for recipeEntity in recipeEntities {
             viewContext.delete(recipeEntity)
         }
         saveContext()
@@ -66,10 +73,8 @@ class RecipeCoreDataManager {
 
     private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Reciplease")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
+        container.loadPersistentStores(completionHandler: { (_, error) in
+            if let error = error as NSError? { fatalError("Unresolved error \(error), \(error.userInfo)") }
         })
         return container
     }()
@@ -85,18 +90,13 @@ class RecipeCoreDataManager {
         if context.hasChanges {
             do {
                 try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
+            } catch { fatalError("Unresolved error") }
         }
     }
     
     private func getStoredRecipeEntities() -> [RecipeEntity] {
         let request: NSFetchRequest<RecipeEntity> = RecipeEntity.fetchRequest()
-        guard let recipeEntities = try? viewContext.fetch(request) else {
-            return []
-        }
+        guard let recipeEntities = try? viewContext.fetch(request) else { return [] }
         return recipeEntities
     }
 }

@@ -25,14 +25,15 @@ final class TabBarViewController: UITabBarController {
     
    private func addBordureInTabBar() {
         let midX = self.view.bounds.midX
-        
+        let minY = self.view.bounds.minY
+
         let topline = CALayer()
-        topline.frame = CGRect(x: 0, y: 0, width: self.tabBar.frame.width, height: 1)
+        topline.frame = CGRect(x: 0, y: minY, width: self.tabBar.frame.width, height: 1)
         topline.backgroundColor = UIColor.gray.cgColor
         self.tabBar.layer.addSublayer(topline)
         
         let verticalLine = CALayer()
-        verticalLine.frame = CGRect(x:midX, y: 0, width: 1, height: self.tabBar.frame.height)
+        verticalLine.frame = CGRect(x: midX, y: 0, width: 1, height: self.tabBar.frame.height)
         verticalLine.backgroundColor = UIColor.gray.cgColor
         self.tabBar.layer.addSublayer(verticalLine)
     }

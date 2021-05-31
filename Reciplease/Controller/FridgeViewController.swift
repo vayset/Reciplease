@@ -39,6 +39,7 @@ final class FridgeViewController: UIViewController {
         self.searchRecipesUIButton.isEnabled = false
         fridgeService.getRecipes(completion: handleRecipesFetchResponse(fridgeResponse:))
     }
+    
     // MARK: - Internal
 
     // MARK: - Methods - Internal
@@ -52,6 +53,7 @@ final class FridgeViewController: UIViewController {
         setupUI()
         setupTextViewToolBar()
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if
@@ -62,12 +64,15 @@ final class FridgeViewController: UIViewController {
             destinationViewController.shouldDisplayFavorites = false
         }
     }
+    
     // MARK: - Private
     // MARK: - Properties - Private
+    
     private let fridgeService = FridgeService.shared
     private let alertManagerController = AlertManagerController.shared
 
     // MARK: - Methods - Private
+    
     private func setupUI() {
         addIngredientsUIButton.layer.cornerRadius = 5
         clearIngredientsUIButton.layer.cornerRadius = 5
@@ -78,6 +83,7 @@ final class FridgeViewController: UIViewController {
         ingredientsTextField.layer.addSublayer(bottomLine)
         ingredientsTextField.attributedPlaceholder = NSAttributedString(string: "Lemon, Cheese, Sausages...", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray.withAlphaComponent(0.6)])
     }
+    
     private func setupTextViewToolBar() {
         let toolBar = UIToolbar(
             frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 35)
@@ -88,9 +94,11 @@ final class FridgeViewController: UIViewController {
         ]
         ingredientsTextField.inputAccessoryView = toolBar
     }
+    
     @objc private func closeKeyboard() {
         ingredientsTextField.resignFirstResponder()
     }
+    
     private func handleRecipesFetchResponse(fridgeResponse: Result<[Recipe], FridgeServiceError>) {
         DispatchQueue.main.async {
             self.activityIndicatorView.stopAnimating()
@@ -116,6 +124,7 @@ extension FridgeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         fridgeService.ingredients.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell") else {
             return UITableViewCell()

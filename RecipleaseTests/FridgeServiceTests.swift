@@ -217,7 +217,6 @@ class FridgeServiceTests: XCTestCase {
             RecipeDataContainer(recipe: recipe)
         ]
         
-        
         let expectation = XCTestExpectation()
         
         fridgeService.fetchRecipesPhotos(recipesDataContainers: recipesDataContainers) {
@@ -225,10 +224,8 @@ class FridgeServiceTests: XCTestCase {
             expectation.fulfill()
         }
         
-        
         wait(for: [expectation], timeout: 0.1)
     }
-    
     
     func test_givenRecipeWithoutImageUrl_whenFetchRecipesPhotos_thenCompletionIsNotTriggered() throws {
 
@@ -241,19 +238,13 @@ class FridgeServiceTests: XCTestCase {
             RecipeDataContainer(recipe: recipe)
         ]
         
-        
-
         fridgeService.fetchRecipesPhotos(recipesDataContainers: recipesDataContainers) {
             XCTAssert(false)
         }
         
         XCTAssert(true)
         
-        
-      
     }
-    
-    
     
     func test_givenRecipeWithImageUrlAndBadNetworkManager_whenFetchRecipesPhotos_thenCompletionIsNotTriggered() throws {
 
@@ -266,15 +257,11 @@ class FridgeServiceTests: XCTestCase {
             RecipeDataContainer(recipe: recipe)
         ]
         
-        
-        
         fridgeService.fetchRecipesPhotos(recipesDataContainers: recipesDataContainers) {
             XCTAssert(false)
         }
-        
-        
+            
         XCTAssert(true)
     }
     
-
 }

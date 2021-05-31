@@ -157,6 +157,4 @@ extension RecipesDetailsViewController: UITableViewDataSource {
     
 }
 
-extension RecipesDetailsViewController: UITableViewDelegate {
-    
-}
+extension RecipesDetailsViewController: UITableViewDelegate {}

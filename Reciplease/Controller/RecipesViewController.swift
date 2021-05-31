@@ -13,6 +13,7 @@ final class RecipesViewController: UIViewController {
 
     @IBOutlet weak private var noRecipeLabel: UILabel!
     @IBOutlet weak private var recipesTableView: UITableView!
+    
     // MARK: - Internal
 
     // MARK: - Properties - Private
@@ -26,6 +27,7 @@ final class RecipesViewController: UIViewController {
         }
     }
     var shouldDisplayFavorites = true
+    
     // MARK: - Methods - Private
 
     override func viewDidLoad() {
