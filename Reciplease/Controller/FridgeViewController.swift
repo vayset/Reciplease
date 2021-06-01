@@ -106,7 +106,7 @@ final class FridgeViewController: UIViewController {
             self.searchRecipesUIButton.isEnabled = true
             switch fridgeResponse {
             case .failure( _):
-                self.alertManagerController.presentSimpleAlert(from: self, message: "Ingredient list is empty")
+                self.alertManagerController.presentSimpleAlert(from: self, message: "Failed to fetch recipes")
             case .success(let recipes):
                 guard !recipes.isEmpty else {
                     self.alertManagerController.presentSimpleAlert(from: self, message: "No recipe matched your ingredients")

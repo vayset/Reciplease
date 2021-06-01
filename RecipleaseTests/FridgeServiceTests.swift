@@ -5,7 +5,7 @@ class FridgeServiceTests: XCTestCase {
     
     // MARK: Add Ingredient
 
-    func testAddIngredientFailIngredientIsEmpty() throws {
+    func test_givenAddIngredient_whenAddWhiteSpace_FailIngredientIsEmpty() throws {
        let fridgeService = FridgeService()
         
         let result = fridgeService.addIngredient(" ")
@@ -110,7 +110,7 @@ class FridgeServiceTests: XCTestCase {
         }
     }
     
-    func testAddIngredientSucces() throws {
+    func test_givenEmptyIngredientList_whenAddIngredient_thenIngredientAddded() throws {
        let fridgeService = FridgeService()
         
         let result = fridgeService.addIngredient("lemon")

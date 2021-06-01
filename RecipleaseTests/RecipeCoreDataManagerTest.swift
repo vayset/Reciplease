@@ -11,22 +11,17 @@ import XCTest
 class RecipeCoreDataManagerTest: XCTestCase {
     
     var recipeCoreDataManager: RecipeCoreDataManager!
-//    var coreDataStack: CoreDataStackMock!
-    
-//    func testAddRecipeMethods_WhenARecipeIsCreated_ThenshouldBeCorrectlySaved() {
-//        recipeCoreDataManager.createRecipe(recipeDataContainer: .init(recipe: .init(uri: nil, label: nil, image: "www.google.com", source: nil, url: nil, shareAs: nil, yield: nil, dietLabels: nil, ingredientLines: nil, calories: nil, totalWeight: nil, totalTime: nil)))
-//        XCTAssertFalse(recipeCoreDataManager.   .recipesFav.isEmpty)
-//        XCTAssertTrue(coreDataManager.recipesFav.count == 1)
-//    }
-    
-    
-    
+
     override func setUp() {
         super.setUp()
         recipeCoreDataManager = RecipeCoreDataManager()
         recipeCoreDataManager.deleteAllRecipes()
     }
-    
+
+    override func tearDown() {
+        super.tearDown()
+        recipeCoreDataManager.deleteAllRecipes()
+    }
     
     func test_givenNoRecipeStoredInDatabase_whenCreateRecipe_thenReadOneStoredRecipe() {
         
@@ -35,10 +30,8 @@ class RecipeCoreDataManagerTest: XCTestCase {
         createMockRecipeInDatabase(label: "Pizza")
         
         XCTAssertTrue(!recipeCoreDataManager.readRecipes().isEmpty)
-
     }
-    
-    
+        
     func test_givenMultipleRecipesCreatedInDatabase_whenDeleteSpecificRecipe_thenIsAbsentWhenReading() {
         XCTAssertTrue(recipeCoreDataManager.readRecipes().isEmpty)
         createMockRecipeInDatabase(label: "Pizza")
@@ -58,7 +51,6 @@ class RecipeCoreDataManagerTest: XCTestCase {
         
     }
     
-    
     private func createMockRecipeInDatabase(label: String) {
         let recipe = Recipe(
             uri: nil,
@@ -77,5 +69,12 @@ class RecipeCoreDataManagerTest: XCTestCase {
         
         let recipeContainer = RecipeDataContainer(recipe: recipe)
         recipeCoreDataManager.createRecipe(recipeDataContainer: recipeContainer)
+    }
+    
+    func test_givenFailContextFetch_whenReadRecipes_thenGetEmptyRecipeArray() {
+        let coreDataContextProviderMock = CoreDataContextProviderMock()
+        let recipeCoreDataManager = RecipeCoreDataManager(coreDataContextProvider: coreDataContextProviderMock)
+        
+        XCTAssertTrue(recipeCoreDataManager.readRecipes().isEmpty)
     }
 }

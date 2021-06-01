@@ -1,3 +1,4 @@
+import Foundation
 import CoreData
 
 class RecipeCoreDataManager {
@@ -9,9 +10,13 @@ class RecipeCoreDataManager {
     static let shared = RecipeCoreDataManager()
         
     // MARK: - Methods - Internal
+    
+    init(coreDataContextProvider: CoreDataContextProviderProtocol = CoreDataContextProvider()) {
+        self.coreDataContextProvider = coreDataContextProvider
+    }
 
     func createRecipe(recipeDataContainer: RecipeDataContainer) {
-        let recipeEntity = RecipeEntity(context: viewContext)
+        let recipeEntity = RecipeEntity(context: coreDataContextProvider.viewContext)
         recipeEntity.label = recipeDataContainer.recipe.label
         recipeEntity.imageData = recipeDataContainer.photo
         recipeEntity.ingredientLines = recipeDataContainer.recipe.ingredientLines as NSObject?
@@ -19,27 +24,26 @@ class RecipeCoreDataManager {
         if let totalTime = recipeDataContainer.recipe.totalTime {
             recipeEntity.totalTime = Int32(totalTime)
         }
-        do {
-            try viewContext.save()
-        } catch { print("error") }
+        
+        coreDataContextProvider.save()
     }
     
     func deleteRecipe(with title: String) {
         let recipeEntities = getStoredRecipeEntities()
         
         for recipeEntity in recipeEntities where recipeEntity.label == title {
-            viewContext.delete(recipeEntity)
+            coreDataContextProvider.delete(recipeEntity: recipeEntity)
         }
-        saveContext()
+        coreDataContextProvider.save()
     }
     
     func deleteAllRecipes() {
         let recipeEntities = getStoredRecipeEntities()
         
         for recipeEntity in recipeEntities {
-            viewContext.delete(recipeEntity)
+            coreDataContextProvider.delete(recipeEntity: recipeEntity)
         }
-        saveContext()
+        coreDataContextProvider.save()
     }
     
     func readRecipes() -> [RecipeDataContainer] {
@@ -69,34 +73,15 @@ class RecipeCoreDataManager {
     
     // MARK: - Properties - Private
     
-    // MARK: - Core Data stack
-
-    private lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Reciplease")
-        container.loadPersistentStores(completionHandler: { (_, error) in
-            if let error = error as NSError? { fatalError("Unresolved error \(error), \(error.userInfo)") }
-        })
-        return container
-    }()
-    
-    private var viewContext: NSManagedObjectContext {
-        return persistentContainer.viewContext
-    }
+    private let coreDataContextProvider: CoreDataContextProviderProtocol
     
     // MARK: - Methods - Private
 
-    private func saveContext() {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch { fatalError("Unresolved error") }
-        }
-    }
-    
     private func getStoredRecipeEntities() -> [RecipeEntity] {
         let request: NSFetchRequest<RecipeEntity> = RecipeEntity.fetchRequest()
-        guard let recipeEntities = try? viewContext.fetch(request) else { return [] }
+        guard let recipeEntities = try? coreDataContextProvider.fetch(request) else {
+            return []
+        }
         return recipeEntities
     }
 }

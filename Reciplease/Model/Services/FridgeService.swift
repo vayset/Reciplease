@@ -1,6 +1,6 @@
 import Foundation
 
-protocol FridgeServiceDelegate: class {
+protocol FridgeServiceDelegate: AnyObject {
     func didUpdateIngredients()    
 }
 
@@ -27,13 +27,6 @@ final class FridgeService {
         self.urlComponents = urlComponents
     }
 
-    /// "Tomato, Cheese, Lemon"
-    ///=> ["Tomato", "Cheese", "Lemon"]
-    /// 1. tomato
-    /// 2. retire les blanc et met le tout en miniscule
-    /// 3. Check que pas vide
-    /// 4. Check que le tableau d'ingrédient ne continet PAS deja l'ingrédient à ajouter
-    /// 5. Ajoute
     func addIngredient(_ ingredientsAsSingleString: String) -> Result<Void, FridgeServiceError> {
         
         let ingredientsSplit = ingredientsAsSingleString.split(separator: ",")

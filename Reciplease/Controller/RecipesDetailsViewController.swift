@@ -111,7 +111,6 @@ final class RecipesDetailsViewController: UIViewController {
     private func setupUI() {
         recipeTitleLabel.text = recipeDataContainer?.recipe.label
         if let photoData = recipeDataContainer?.photo {
-            print(photoData)
             recipeImageView.image = UIImage(data: photoData)
         }
         getDirectionsOutlet.layer.cornerRadius = 5
@@ -127,7 +126,6 @@ final class RecipesDetailsViewController: UIViewController {
         
         if let totalTime = recipe?.totalTime {
             cookingTimeLabel.text = timeConverter.formatTotaltime(totalTime)
-            print(totalTime)
         }
     }
     
